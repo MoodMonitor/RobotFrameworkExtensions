@@ -4,6 +4,7 @@ from robot.output.loggerapi import LoggerApi
 from robot.output.librarylogger import LOGGING_THREADS
 from functools import partial
 
+from robot.result.model import Keyword as ResultKeyword
 
 class DumpOutputFile(LoggerApi):
 
@@ -22,26 +23,40 @@ class DumpOutputFile(LoggerApi):
 
 class LoggingThreads:
 
-    def __init__(self):
+    def __init__(self, grouped_log=False, thread_timeout=None):
         """
         A class designed to enable the collection of logs from threads in Python.
         By default, Robot Framework does not support logging from threads, but this
         class provides a mechanism to capture and manage log messages originating
         from multiple threads.
+
+        Parameters
+        ----------
+        grouped_log:
+            When ``True`` each worker thread's messages are replayed inside a
+            dedicated ``Thread <name> Logs`` keyword in ``log.html``, creating
+            a collapsible section per thread.
+        thread_timeout:
+            Optional timeout (seconds) passed to each ``thread.join()`` call.
+            ``None`` means wait indefinitely.
         """
+        self.grouped_log = grouped_log
+        self.thread_timeout = thread_timeout
+
         self.hijacked_console_logger = None
         self.hijacked_syslog = None
         self.hijacked_output_file = None
         self.main_robot_threads = None
         self.loggers_manager = None
         self.threads = []
+        self._added_thread_names = []
 
     def hijack_loggers(self):
         """
         A function that intercepts the current loggers from the LOGGER class to
         allow them to be restored later.
         """
-        self.hijacked_console_logger = LOGGER._console_logger
+        self.hijacked_console_logger = LOGGER._console
         self.hijacked_syslog = LOGGER._syslog
         self.hijacked_output_file = LOGGER._output_file
 
@@ -55,11 +70,11 @@ class LoggingThreads:
         """
         is_logged_function = LOGGER._output_file.is_logged
         LOGGER._output_file = DumpOutputFile(is_logged_function)
-        LOGGER.unregister_logger()
+        LOGGER._syslog = None
         LOGGER.unregister_console_logger()
 
     def register_loggers(self):
-        LOGGER._console_logger = self.hijacked_console_logger
+        LOGGER._console = self.hijacked_console_logger
         LOGGER._syslog = self.hijacked_syslog
         LOGGER._output_file = self.hijacked_output_file
 
@@ -72,6 +87,7 @@ class LoggingThreads:
         thread = threading.Thread(name=thread_name, target=function, args=args, kwargs=kwargs)
         LOGGING_THREADS.append(thread_name)
         self.loggers_manager.thread_messages[thread_name] = []
+        self._added_thread_names.append(thread_name)
         thread.start()
         self.threads.append(thread)
 
@@ -88,38 +104,50 @@ class LoggingThreads:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         for thread in self.threads:
-            thread.join()
+            thread.join(timeout=self.thread_timeout)
         LOGGER.unregister_logger(self.loggers_manager)
-        for thread_name in list(LOGGING_THREADS):
-            LOGGING_THREADS.remove(thread_name) if thread_name not in self.main_robot_threads else None
+        for thread_name in self._added_thread_names:
+            if thread_name in LOGGING_THREADS:
+                LOGGING_THREADS.remove(thread_name)
         self.register_loggers()
-        self.loggers_manager.log_all_threads_messages()
-        self.loggers_manager.thread_messages = {}
+        self.loggers_manager.log_all_threads_messages(grouped=self.grouped_log)
+        self._added_thread_names = []
+        self.threads = []
 
 
 class LoggersManager(LoggerApi):
-    thread_messages = {}
 
     def __init__(self, main_robot_threads, hijacked_console_logger, hijacked_syslog, hijacked_outputfile):
         self.main_robot_threads = main_robot_threads
+        self.thread_messages = {}
+        self._messages_lock = threading.Lock()
         hijacked_loggers = [hijacked_outputfile, hijacked_syslog, hijacked_console_logger]
         self.hijacked_loggers = [logger for logger in hijacked_loggers if logger]
 
     def check_if_main_robot_thread(self):
         return threading.current_thread().name in self.main_robot_threads
 
-    @staticmethod
-    def add_logger_func_to_thread_message(logger_func):
-        try:
-            LoggersManager.thread_messages[threading.current_thread().name].append(logger_func)
-        except KeyError:
-            LoggersManager.thread_messages[threading.current_thread().name] = [logger_func]
+    def add_logger_func_to_thread_message(self, logger_func):
+        current_thread_name = threading.current_thread().name
+        with self._messages_lock:
+            self.thread_messages.setdefault(current_thread_name, []).append(logger_func)
 
-    @staticmethod
-    def log_all_threads_messages():
-        for thread_messages in LoggersManager.thread_messages.values():
-            for logger_func in thread_messages:
-                logger_func()
+    def log_all_threads_messages(self, grouped=False):
+        if not grouped:
+            for thread_messages in self.thread_messages.values():
+                for logger_func in thread_messages:
+                    logger_func()
+            return
+
+        for thread_name, thread_messages in self.thread_messages.items():
+            keyword_name = f"Thread {thread_name} Logs"
+            result_keyword = ResultKeyword(name=keyword_name, owner="LoggingThreads", status="PASS", args=())
+            LOGGER.start_keyword(None, result_keyword)
+            try:
+                for logger_func in thread_messages:
+                    logger_func()
+            finally:
+                LOGGER.end_keyword(None, result_keyword)
 
     def manage_loggers(self, logger_function_name, *logger_args, **logger_kwargs):
         """
@@ -129,7 +157,9 @@ class LoggersManager(LoggerApi):
         """
         if self.check_if_main_robot_thread():
             for logger in self.hijacked_loggers:
-                getattr(logger, logger_function_name)(*logger_args, **logger_kwargs)
+                method = getattr(logger, logger_function_name, None)
+                if method is not None:
+                    method(*logger_args, **logger_kwargs)
         else:
             self.add_logger_func_to_thread_message(
                 partial(getattr(LOGGER, logger_function_name), *logger_args, **logger_kwargs))
@@ -153,16 +183,16 @@ class LoggersManager(LoggerApi):
         self.manage_loggers("end_keyword", data, result)
 
     def start_user_keyword(self, data, implementation, result):
-        self.manage_loggers("start_user_keyword", data, result)
+        self.manage_loggers("start_user_keyword", data, implementation, result)
 
     def end_user_keyword(self, data, implementation, result):
-        self.manage_loggers("end_user_keyword", data, result)
+        self.manage_loggers("end_user_keyword", data, implementation, result)
 
     def start_invalid_keyword(self, data, implementation, result):
-        self.manage_loggers("start_invalid_keyword", data, result)
+        self.manage_loggers("start_invalid_keyword", data, implementation, result)
 
     def end_invalid_keyword(self, data, implementation, result):
-        self.manage_loggers("end_invalid_keyword", data, result)
+        self.manage_loggers("end_invalid_keyword", data, implementation, result)
 
     def start_for(self, data, result):
         self.manage_loggers("start_for", data, result)

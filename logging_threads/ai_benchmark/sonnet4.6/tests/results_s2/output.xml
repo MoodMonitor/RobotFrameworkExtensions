@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.13.2 on win32)" generated="2026-04-20T10:22:21.806192" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Scenario2" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\test_scenario2.robot">
+<test id="s1-t1" name="S2-TC1: Two Threads Run Simple Keywords In Parallel" line="18">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.871273" level="INFO">@{kw1} = [ Simple Worker Keyword | Thread-1 | 3 ]</msg>
+<var>@{kw1}</var>
+<arg>Simple Worker Keyword</arg>
+<arg>${T1}</arg>
+<arg>3</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.870321" elapsed="0.001084"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.872846" level="INFO">@{kw2} = [ Simple Worker Keyword | Thread-2 | 3 ]</msg>
+<var>@{kw2}</var>
+<arg>Simple Worker Keyword</arg>
+<arg>${T2}</arg>
+<arg>3</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.872110" elapsed="0.000799"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Simple Worker Keyword" owner="ThreadLogger">
+<kw name="Simple Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.874988" level="INFO">[Thread-1] Keyword starting, steps=3</msg>
+<msg time="2026-04-20T10:22:21.875005" level="INFO">[Thread-1] Step 1/3</msg>
+<msg time="2026-04-20T10:22:21.875015" level="INFO">[Thread-1] Step 2/3</msg>
+<msg time="2026-04-20T10:22:21.875023" level="INFO">[Thread-1] Step 3/3</msg>
+<msg time="2026-04-20T10:22:21.875030" level="INFO">[Thread-1] Keyword done</msg>
+<arg>Thread-1</arg>
+<arg>3</arg>
+<doc>Log a sequence of steps – plain library keyword.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.874787" elapsed="0.000273"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.873215" elapsed="0.001859"/>
+</kw>
+<kw name="[Thread 2] Simple Worker Keyword" owner="ThreadLogger">
+<kw name="Simple Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.875569" level="INFO">[Thread-2] Keyword starting, steps=3</msg>
+<msg time="2026-04-20T10:22:21.875581" level="INFO">[Thread-2] Step 1/3</msg>
+<msg time="2026-04-20T10:22:21.875589" level="INFO">[Thread-2] Step 2/3</msg>
+<msg time="2026-04-20T10:22:21.875596" level="INFO">[Thread-2] Step 3/3</msg>
+<msg time="2026-04-20T10:22:21.875602" level="INFO">[Thread-2] Keyword done</msg>
+<arg>Thread-2</arg>
+<arg>3</arg>
+<doc>Log a sequence of steps – plain library keyword.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.875413" elapsed="0.000215"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.873223" elapsed="0.002416"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.873060" elapsed="0.003240"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.876975" level="INFO">Both simple worker keywords completed</msg>
+<arg>Both simple worker keywords completed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.876503" elapsed="0.000567"/>
+</kw>
+<doc>Two threads each run Simple Worker Keyword.
+Expected: two [Thread N] wrappers each containing a
+sub-keyword with its log messages.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.869142" elapsed="0.008258"/>
+</test>
+<test id="s1-t2" name="S2-TC2: Three Threads Run Keywords Concurrently" line="27">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.879839" level="INFO">@{kw1} = [ Simple Worker Keyword | Thread-1 | 2 ]</msg>
+<var>@{kw1}</var>
+<arg>Simple Worker Keyword</arg>
+<arg>${T1}</arg>
+<arg>2</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.879305" elapsed="0.000581"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.880448" level="INFO">@{kw2} = [ Simple Worker Keyword | Thread-2 | 2 ]</msg>
+<var>@{kw2}</var>
+<arg>Simple Worker Keyword</arg>
+<arg>${T2}</arg>
+<arg>2</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.880061" elapsed="0.000415"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.880882" level="INFO">@{kw3} = [ Simple Worker Keyword | Thread-3 | 2 ]</msg>
+<var>@{kw3}</var>
+<arg>Simple Worker Keyword</arg>
+<arg>${T3}</arg>
+<arg>2</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.880589" elapsed="0.000320"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Simple Worker Keyword" owner="ThreadLogger">
+<kw name="Simple Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.881960" level="INFO">[Thread-1] Keyword starting, steps=2</msg>
+<msg time="2026-04-20T10:22:21.881984" level="INFO">[Thread-1] Step 1/2</msg>
+<msg time="2026-04-20T10:22:21.882000" level="INFO">[Thread-1] Step 2/2</msg>
+<msg time="2026-04-20T10:22:21.882012" level="INFO">[Thread-1] Keyword done</msg>
+<arg>Thread-1</arg>
+<arg>2</arg>
+<doc>Log a sequence of steps – plain library keyword.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.881713" elapsed="0.000342"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.881205" elapsed="0.000869"/>
+</kw>
+<kw name="[Thread 2] Simple Worker Keyword" owner="ThreadLogger">
+<kw name="Simple Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.882782" level="INFO">[Thread-2] Keyword starting, steps=2</msg>
+<msg time="2026-04-20T10:22:21.882806" level="INFO">[Thread-2] Step 1/2</msg>
+<msg time="2026-04-20T10:22:21.882822" level="INFO">[Thread-2] Step 2/2</msg>
+<msg time="2026-04-20T10:22:21.882835" level="INFO">[Thread-2] Keyword done</msg>
+<arg>Thread-2</arg>
+<arg>2</arg>
+<doc>Log a sequence of steps – plain library keyword.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.882545" elapsed="0.000329"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.881212" elapsed="0.001681"/>
+</kw>
+<kw name="[Thread 3] Simple Worker Keyword" owner="ThreadLogger">
+<kw name="Simple Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.883572" level="INFO">[Thread-3] Keyword starting, steps=2</msg>
+<msg time="2026-04-20T10:22:21.883588" level="INFO">[Thread-3] Step 1/2</msg>
+<msg time="2026-04-20T10:22:21.883597" level="INFO">[Thread-3] Step 2/2</msg>
+<msg time="2026-04-20T10:22:21.883604" level="INFO">[Thread-3] Keyword done</msg>
+<arg>Thread-3</arg>
+<arg>2</arg>
+<doc>Log a sequence of steps – plain library keyword.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.883348" elapsed="0.000284"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.881219" elapsed="0.002426"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<arg>${kw3}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.881020" elapsed="0.003205"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.884805" level="INFO">Three-thread scenario passed</msg>
+<arg>Three-thread scenario passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.884399" elapsed="0.000481"/>
+</kw>
+<doc>Three-thread scenario – verifies absence of cross-thread
+result contamination under higher concurrency.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.878259" elapsed="0.006782"/>
+</test>
+<test id="s1-t3" name="S2-TC3: Keyword With FOR Loop Preserves Nesting In Report" line="36">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.886343" level="INFO">@{kw1} = [ Keyword With For Loop | Thread-1 | x,y,z ]</msg>
+<var>@{kw1}</var>
+<arg>Keyword With For Loop</arg>
+<arg>${T1}</arg>
+<arg>x,y,z</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.885923" elapsed="0.000458"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.887311" level="INFO">@{kw2} = [ Keyword With For Loop | Thread-2 | 1,2,3,4 ]</msg>
+<var>@{kw2}</var>
+<arg>Keyword With For Loop</arg>
+<arg>${T2}</arg>
+<arg>1,2,3,4</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.886762" elapsed="0.000618"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Keyword With For Loop" owner="ThreadLogger">
+<kw name="Keyword With For Loop" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.888874" level="INFO">[Thread-1] FOR loop keyword starting</msg>
+<msg time="2026-04-20T10:22:21.888890" level="INFO">[Thread-1] Processing item: x</msg>
+<msg time="2026-04-20T10:22:21.888904" level="INFO">[Thread-1] Processing item: y</msg>
+<msg time="2026-04-20T10:22:21.888916" level="INFO">[Thread-1] Processing item: z</msg>
+<msg time="2026-04-20T10:22:21.888927" level="INFO">[Thread-1] FOR loop done, result: ['X', 'Y', 'Z']</msg>
+<arg>Thread-1</arg>
+<arg>x,y,z</arg>
+<doc>Execute a FOR loop internally to verify nested structure in output.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.888737" elapsed="0.000217"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.887978" elapsed="0.000988"/>
+</kw>
+<kw name="[Thread 2] Keyword With For Loop" owner="ThreadLogger">
+<kw name="Keyword With For Loop" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.889758" level="INFO">[Thread-2] FOR loop keyword starting</msg>
+<msg time="2026-04-20T10:22:21.889842" level="INFO">[Thread-2] Processing item: 1</msg>
+<msg time="2026-04-20T10:22:21.889858" level="INFO">[Thread-2] Processing item: 2</msg>
+<msg time="2026-04-20T10:22:21.889867" level="INFO">[Thread-2] Processing item: 3</msg>
+<msg time="2026-04-20T10:22:21.889874" level="INFO">[Thread-2] Processing item: 4</msg>
+<msg time="2026-04-20T10:22:21.889884" level="INFO">[Thread-2] FOR loop done, result: ['1', '2', '3', '4']</msg>
+<arg>Thread-2</arg>
+<arg>1,2,3,4</arg>
+<doc>Execute a FOR loop internally to verify nested structure in output.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.889343" elapsed="0.000572"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.887986" elapsed="0.001943"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.887619" elapsed="0.002815"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.890870" level="INFO">FOR-loop keyword nesting verified</msg>
+<arg>FOR-loop keyword nesting verified</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.890613" elapsed="0.000320"/>
+</kw>
+<doc>The Keyword With For Loop keyword logs inside a Python
+for loop. The log messages must appear nested inside the
+thread wrapper in output.xml.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.885340" elapsed="0.005751"/>
+</test>
+<test id="s1-t4" name="S2-TC4: Keyword With IF Branch Preserves Log Grouping" line="45">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.892345" level="INFO">@{kw1} = [ Keyword With If Branch | Thread-1 | 50 ]</msg>
+<var>@{kw1}</var>
+<arg>Keyword With If Branch</arg>
+<arg>${T1}</arg>
+<arg>50</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.891951" elapsed="0.000430"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.893767" level="INFO">@{kw2} = [ Keyword With If Branch | Thread-2 | 5 ]</msg>
+<var>@{kw2}</var>
+<arg>Keyword With If Branch</arg>
+<arg>${T2}</arg>
+<arg>5</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.892574" elapsed="0.001511"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Keyword With If Branch" owner="ThreadLogger">
+<kw name="Keyword With If Branch" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.895775" level="INFO">[Thread-1] IF keyword starting, value=50</msg>
+<msg time="2026-04-20T10:22:21.895791" level="INFO">[Thread-1] Branch: value 50 is large</msg>
+<msg time="2026-04-20T10:22:21.895800" level="INFO">[Thread-1] IF keyword done, category=large</msg>
+<arg>Thread-1</arg>
+<arg>50</arg>
+<doc>Use BuiltIn.run_keyword_if to produce IF node in output.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.895602" elapsed="0.000226"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.895054" elapsed="0.000786"/>
+</kw>
+<kw name="[Thread 2] Keyword With If Branch" owner="ThreadLogger">
+<kw name="Keyword With If Branch" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.896263" level="INFO">[Thread-2] IF keyword starting, value=5</msg>
+<msg time="2026-04-20T10:22:21.896277" level="INFO">[Thread-2] Branch: value 5 is small</msg>
+<msg time="2026-04-20T10:22:21.896286" level="INFO">[Thread-2] IF keyword done, category=small</msg>
+<arg>Thread-2</arg>
+<arg>5</arg>
+<doc>Use BuiltIn.run_keyword_if to produce IF node in output.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.896135" elapsed="0.000176"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.895065" elapsed="0.001256"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.894666" elapsed="0.001961"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.897067" level="INFO">IF-branch keyword grouping verified</msg>
+<arg>IF-branch keyword grouping verified</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.896722" elapsed="0.000386"/>
+</kw>
+<doc>Two threads run Keyword With If Branch with different
+values, taking different code paths.
+Both thread wrappers must appear with correct messages.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.891331" elapsed="0.005870"/>
+</test>
+<test id="s1-t5" name="S2-TC5: Keyword With TRY-EXCEPT Preserves Structure" line="54">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.898119" level="INFO">@{kw1} = [ Keyword With Try Except | Thread-1 | false ]</msg>
+<var>@{kw1}</var>
+<arg>Keyword With Try Except</arg>
+<arg>${T1}</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.897795" elapsed="0.000352"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.898524" level="INFO">@{kw2} = [ Keyword With Try Except | Thread-2 | true ]</msg>
+<var>@{kw2}</var>
+<arg>Keyword With Try Except</arg>
+<arg>${T2}</arg>
+<arg>true</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.898247" elapsed="0.000299"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Keyword With Try Except" owner="ThreadLogger">
+<kw name="Keyword With Try Except" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.899344" level="INFO">[Thread-1] TRY keyword starting</msg>
+<msg time="2026-04-20T10:22:21.899364" level="INFO">[Thread-1] Inner block succeeded</msg>
+<msg time="2026-04-20T10:22:21.899378" level="INFO">[Thread-1] TRY keyword done, result=success</msg>
+<arg>Thread-1</arg>
+<arg>false</arg>
+<doc>Use try/except internally to verify TRY node in output.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.899172" elapsed="0.000243"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.898762" elapsed="0.000669"/>
+</kw>
+<kw name="[Thread 2] Keyword With Try Except" owner="ThreadLogger">
+<kw name="Keyword With Try Except" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.899889" level="INFO">[Thread-2] TRY keyword starting</msg>
+<msg time="2026-04-20T10:22:21.899907" level="WARN">[Thread-2] Caught: [Thread-2] Deliberate inner error</msg>
+<msg time="2026-04-20T10:22:21.900096" level="INFO">[Thread-2] TRY keyword done, result=caught</msg>
+<arg>Thread-2</arg>
+<arg>true</arg>
+<doc>Use try/except internally to verify TRY node in output.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.899753" elapsed="0.000398"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.898766" elapsed="0.001403"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.898628" elapsed="0.002036"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.901653" level="INFO">TRY-EXCEPT keyword structure verified</msg>
+<arg>TRY-EXCEPT keyword structure verified</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.901242" elapsed="0.000493"/>
+</kw>
+<doc>Thread 1 succeeds in try block; Thread 2 hits the except
+branch.  Both must appear cleanly in their thread wrappers.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.897402" elapsed="0.004521"/>
+</test>
+<test id="s1-t6" name="S2-TC6: Failing Keyword In Thread Shows FAIL Status" line="62">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.903140" level="INFO">@{kw_fail} = [ Failing Worker Keyword | Thread-1 ]</msg>
+<var>@{kw_fail}</var>
+<arg>Failing Worker Keyword</arg>
+<arg>${T1}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.902730" elapsed="0.000447"/>
+</kw>
+<kw name="Run Keyword And Expect Error" owner="BuiltIn">
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Failing Worker Keyword" owner="ThreadLogger">
+<kw name="Failing Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.907018" level="INFO">[Thread-1] About to fail</msg>
+<msg time="2026-04-20T10:22:21.907231" level="FAIL">[Thread-1] Intentional keyword failure</msg>
+<msg time="2026-04-20T10:22:21.908373" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\WorkerLib.py", line 118, in failing_worker_keyword
+    raise AssertionError(f"[{thread_id}] Intentional keyword failure")
+AssertionError: [Thread-1] Intentional keyword failure</msg>
+<arg>Thread-1</arg>
+<doc>Keyword that intentionally fails to test error visibility.</doc>
+<status status="FAIL" start="2026-04-20T10:22:21.906682" elapsed="0.001740">[Thread-1] Intentional keyword failure</status>
+</kw>
+<status status="FAIL" start="2026-04-20T10:22:21.904146" elapsed="0.004304">[Thread-1] Intentional keyword failure</status>
+</kw>
+<arg>${kw_fail}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="FAIL" start="2026-04-20T10:22:21.903878" elapsed="0.007511">Parallel execution failed in 1 thread(s): Thread 1: [Thread-1] Intentional keyword failure</status>
+</kw>
+<arg>*Intentional keyword failure*</arg>
+<arg>Run Keywords In Parallel</arg>
+<arg>${kw_fail}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.903308" elapsed="0.008560"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.912579" level="INFO">Expected keyword failure caught and verified</msg>
+<arg>Expected keyword failure caught and verified</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.912047" elapsed="0.000595"/>
+</kw>
+<doc>A thread whose keyword raises AssertionError must appear
+as FAIL in the thread wrapper.  The overall keyword must
+also fail, and we catch that expected failure here.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.902193" elapsed="0.010567"/>
+</test>
+<test id="s1-t7" name="S2-TC7: Mixed Pass And Fail Threads" line="71">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.914432" level="INFO">@{kw_ok} = [ Simple Worker Keyword | Thread-1 | 2 ]</msg>
+<var>@{kw_ok}</var>
+<arg>Simple Worker Keyword</arg>
+<arg>${T1}</arg>
+<arg>2</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.913911" elapsed="0.000578"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.915046" level="INFO">@{kw_fail} = [ Failing Worker Keyword | Thread-2 ]</msg>
+<var>@{kw_fail}</var>
+<arg>Failing Worker Keyword</arg>
+<arg>${T2}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.914661" elapsed="0.000417"/>
+</kw>
+<kw name="Run Keyword And Expect Error" owner="BuiltIn">
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Simple Worker Keyword" owner="ThreadLogger">
+<kw name="Simple Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.916826" level="INFO">[Thread-1] Keyword starting, steps=2</msg>
+<msg time="2026-04-20T10:22:21.916856" level="INFO">[Thread-1] Step 1/2</msg>
+<msg time="2026-04-20T10:22:21.916869" level="INFO">[Thread-1] Step 2/2</msg>
+<msg time="2026-04-20T10:22:21.916882" level="INFO">[Thread-1] Keyword done</msg>
+<arg>Thread-1</arg>
+<arg>2</arg>
+<doc>Log a sequence of steps – plain library keyword.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.916490" elapsed="0.000455"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.915817" elapsed="0.001150"/>
+</kw>
+<kw name="[Thread 2] Failing Worker Keyword" owner="ThreadLogger">
+<kw name="Failing Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.917656" level="INFO">[Thread-2] About to fail</msg>
+<msg time="2026-04-20T10:22:21.917754" level="FAIL">[Thread-2] Intentional keyword failure</msg>
+<msg time="2026-04-20T10:22:21.918235" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\WorkerLib.py", line 118, in failing_worker_keyword
+    raise AssertionError(f"[{thread_id}] Intentional keyword failure")
+AssertionError: [Thread-2] Intentional keyword failure</msg>
+<arg>Thread-2</arg>
+<doc>Keyword that intentionally fails to test error visibility.</doc>
+<status status="FAIL" start="2026-04-20T10:22:21.917476" elapsed="0.000794">[Thread-2] Intentional keyword failure</status>
+</kw>
+<status status="FAIL" start="2026-04-20T10:22:21.915823" elapsed="0.002474">[Thread-2] Intentional keyword failure</status>
+</kw>
+<arg>${kw_ok}</arg>
+<arg>${kw_fail}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="FAIL" start="2026-04-20T10:22:21.915639" elapsed="0.002997">Parallel execution failed in 1 thread(s): Thread 2: [Thread-2] Intentional keyword failure</status>
+</kw>
+<arg>*Intentional keyword failure*</arg>
+<arg>Run Keywords In Parallel</arg>
+<arg>${kw_ok}</arg>
+<arg>${kw_fail}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.915246" elapsed="0.003517"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.919137" level="INFO">Mixed PASS/FAIL thread outcome verified</msg>
+<arg>Mixed PASS/FAIL thread outcome verified</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.918896" elapsed="0.000281"/>
+</kw>
+<doc>Thread 1 passes, Thread 2 fails.  Both wrappers must
+appear in the report with correct PASS/FAIL labels.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.913274" elapsed="0.005996"/>
+</test>
+<test id="s1-t8" name="S2-TC8: Reversibility After Keyword Parallel Execution" line="80">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.920906" level="INFO">@{kw1} = [ Simple Worker Keyword | Thread-1 | 1 ]</msg>
+<var>@{kw1}</var>
+<arg>Simple Worker Keyword</arg>
+<arg>${T1}</arg>
+<arg>1</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.920363" elapsed="0.000595"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Simple Worker Keyword" owner="ThreadLogger">
+<kw name="Simple Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.922701" level="INFO">[Thread-1] Keyword starting, steps=1</msg>
+<msg time="2026-04-20T10:22:21.922781" level="INFO">[Thread-1] Step 1/1</msg>
+<msg time="2026-04-20T10:22:21.922802" level="INFO">[Thread-1] Keyword done</msg>
+<arg>Thread-1</arg>
+<arg>1</arg>
+<doc>Log a sequence of steps – plain library keyword.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.922087" elapsed="0.000770"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:22:21.921381" elapsed="0.001497"/>
+</kw>
+<arg>${kw1}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.921182" elapsed="0.002224"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.923917" level="INFO">MAIN SCOPE RESTORED: log 1</msg>
+<arg>MAIN SCOPE RESTORED: log 1</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.923577" elapsed="0.000398"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.924416" level="INFO">${x} = sanity</msg>
+<var>${x}</var>
+<arg>sanity</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.924113" elapsed="0.000335"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.924868" level="DEBUG">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${x}</arg>
+<arg>sanity</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.924575" elapsed="0.000363"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.925311" level="INFO">MAIN SCOPE RESTORED: BuiltIn.Set Variable works: sanity</msg>
+<arg>MAIN SCOPE RESTORED: BuiltIn.Set Variable works: ${x}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.925056" elapsed="0.000302"/>
+</kw>
+<doc>After Run Keywords In Parallel, the main RF execution
+context must be fully restored:
+- Log messages go to main scope
+- BuiltIn keywords work normally
+- No proxy objects remain active</doc>
+<status status="PASS" start="2026-04-20T10:22:21.919550" elapsed="0.005919"/>
+</test>
+<test id="s1-t9" name="S2-TC9: Context Is Clean After Thread Error" line="93">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.927521" level="INFO">@{kw_fail} = [ Failing Worker Keyword | Thread-1 ]</msg>
+<var>@{kw_fail}</var>
+<arg>Failing Worker Keyword</arg>
+<arg>${T1}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.926856" elapsed="0.000718"/>
+</kw>
+<kw name="Run Keyword And Expect Error" owner="BuiltIn">
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Failing Worker Keyword" owner="ThreadLogger">
+<kw name="Failing Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:22:21.930713" level="INFO">[Thread-1] About to fail</msg>
+<msg time="2026-04-20T10:22:21.930827" level="FAIL">[Thread-1] Intentional keyword failure</msg>
+<msg time="2026-04-20T10:22:21.931396" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\WorkerLib.py", line 118, in failing_worker_keyword
+    raise AssertionError(f"[{thread_id}] Intentional keyword failure")
+AssertionError: [Thread-1] Intentional keyword failure</msg>
+<arg>Thread-1</arg>
+<doc>Keyword that intentionally fails to test error visibility.</doc>
+<status status="FAIL" start="2026-04-20T10:22:21.930430" elapsed="0.001014">[Thread-1] Intentional keyword failure</status>
+</kw>
+<status status="FAIL" start="2026-04-20T10:22:21.929285" elapsed="0.002180">[Thread-1] Intentional keyword failure</status>
+</kw>
+<arg>${kw_fail}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="FAIL" start="2026-04-20T10:22:21.929017" elapsed="0.002989">Parallel execution failed in 1 thread(s): Thread 1: [Thread-1] Intentional keyword failure</status>
+</kw>
+<arg>*</arg>
+<arg>Run Keywords In Parallel</arg>
+<arg>${kw_fail}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.928058" elapsed="0.004303"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.933001" level="INFO">POST-FAILURE: main context still works</msg>
+<arg>POST-FAILURE: main context still works</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.932583" elapsed="0.000496"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.933726" level="INFO">${v} = 2</msg>
+<var>${v}</var>
+<arg>1 + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.933257" elapsed="0.000508"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-20T10:22:21.934260" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${v}</arg>
+<arg>2</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.933921" elapsed="0.000421"/>
+</kw>
+<doc>Even when a thread keyword fails, all RF globals must
+be restored.  After catching the error, the main thread
+must still be able to log and run keywords normally.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.925720" elapsed="0.008764"/>
+</test>
+<doc>Scenario 2 – RF keyword execution inside threads.
+
+Verifies that keywords run in parallel threads produce fully
+structured result trees: sub-keywords, FOR/IF/TRY nodes are
+preserved and grouped per thread in output.xml / log.html.</doc>
+<status status="PASS" start="2026-04-20T10:22:21.807463" elapsed="0.129103"/>
+</suite>
+<statistics>
+<total>
+<stat pass="9" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Scenario2" id="s1" pass="9" fail="0" skip="0">Test Scenario2</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

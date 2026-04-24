@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.13.2 on win32)" generated="2026-04-20T14:44:53.078996" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\Opus4.7\Opus4.6\tests">
+<suite id="s1-s1" name="01 Baseline Problem" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\Opus4.7\Opus4.6\tests\01_baseline_problem.robot">
+<test id="s1-s1-t1" name="Baseline Thread Logging Is Broken" line="8">
+<kw name="Run Worker Baseline" owner="demo_library.DemoLibrary">
+<msg time="2026-04-20T14:44:53.124756" level="INFO">MainThread: starting 3 baseline workers</msg>
+<msg time="2026-04-20T14:44:53.157188" level="INFO">MainThread: baseline workers finished</msg>
+<arg>3</arg>
+<doc>Spawn ``count`` worker threads using the plain Python threading
+API.  Each worker logs using Robot Framework's public logger.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.124597" elapsed="0.032710"/>
+</kw>
+<doc>Three worker threads try to log 3 messages each.
+The log should only show the MainThread messages.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.123667" elapsed="0.033791"/>
+</test>
+<doc>Reproduces the out-of-the-box thread-logging problem.
+Messages logged from threading.Thread workers are dropped
+by robot.output.librarylogger.write.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.117589" elapsed="0.040219"/>
+</suite>
+<suite id="s1-s2" name="02 Solution" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\Opus4.7\Opus4.6\tests\02_solution.robot">
+<test id="s1-s2-t1" name="Thread Logs Are Preserved" line="6">
+<kw name="Run Workers With Thread Logger" owner="demo_library.DemoLibrary">
+<msg time="2026-04-20T14:44:53.160416" level="INFO">MainThread: starting 3 workers via ThreadLogger</msg>
+<kw name="Thread 'worker-0'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.163416" level="INFO">[worker 0] step 0</msg>
+<msg time="2026-04-20T14:44:53.173837" level="INFO">[worker 0] step 1</msg>
+<msg time="2026-04-20T14:44:53.184219" level="INFO">[worker 0] step 2</msg>
+<status status="PASS" start="2026-04-20T14:44:53.160443" elapsed="0.034180"/>
+</kw>
+<kw name="Thread 'worker-1'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.163493" level="INFO">[worker 1] step 0</msg>
+<msg time="2026-04-20T14:44:53.173872" level="INFO">[worker 1] step 1</msg>
+<msg time="2026-04-20T14:44:53.184452" level="INFO">[worker 1] step 2</msg>
+<status status="PASS" start="2026-04-20T14:44:53.160764" elapsed="0.034325"/>
+</kw>
+<kw name="Thread 'worker-2'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.163560" level="INFO">[worker 2] step 0</msg>
+<msg time="2026-04-20T14:44:53.173780" level="INFO">[worker 2] step 1</msg>
+<msg time="2026-04-20T14:44:53.184347" level="INFO">[worker 2] step 2</msg>
+<status status="PASS" start="2026-04-20T14:44:53.160933" elapsed="0.033828"/>
+</kw>
+<msg time="2026-04-20T14:44:53.195851" level="INFO">MainThread: ThreadLogger workers finished</msg>
+<arg>3</arg>
+<doc>Same scenario as above but every worker is started through
+:class:`ThreadLogger`.  All messages - with original timestamps -
+are grouped under a dedicated ``&lt;kw&gt;`` per thread.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.160303" elapsed="0.035666"/>
+</kw>
+<doc>Three worker threads. Their messages must appear
+in output.xml, grouped per thread, with original
+timestamps and without mixing with MainThread.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.159945" elapsed="0.036286"/>
+</test>
+<test id="s1-s2-t2" name="Nested Structures From Thread Are Preserved" line="12">
+<kw name="Run Worker With Nested Structures" owner="demo_library.DemoLibrary">
+<msg time="2026-04-20T14:44:53.197867" level="INFO">MainThread: launching worker with nested structures</msg>
+<kw name="Thread 'nested-1'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.198447" level="INFO">worker enters nested structures</msg>
+<group name="group-level">
+<for flavor="IN">
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'alpha'">
+<msg time="2026-04-20T14:44:53.198725" level="INFO">processing alpha</msg>
+<msg time="2026-04-20T14:44:53.198736" level="INFO">this is the alpha branch</msg>
+<status status="PASS" start="2026-04-20T14:44:53.198700" elapsed="0.000042"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:44:53.198673" elapsed="0.000071"/>
+</if>
+<var name="item">alpha</var>
+<status status="PASS" start="2026-04-20T14:44:53.198642" elapsed="0.000110"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'beta'">
+<msg time="2026-04-20T14:44:53.198820" level="INFO">processing beta</msg>
+<status status="PASS" start="2026-04-20T14:44:53.198803" elapsed="0.000025"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:44:53.198786" elapsed="0.000044"/>
+</if>
+<var name="item">beta</var>
+<status status="PASS" start="2026-04-20T14:44:53.198763" elapsed="0.000071"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'gamma'">
+<msg time="2026-04-20T14:44:53.198883" level="INFO">processing gamma</msg>
+<status status="PASS" start="2026-04-20T14:44:53.198869" elapsed="0.000020"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:44:53.198857" elapsed="0.000034"/>
+</if>
+<var name="item">gamma</var>
+<status status="PASS" start="2026-04-20T14:44:53.198841" elapsed="0.000053"/>
+</iter>
+<var>${item}</var>
+<value>alpha</value>
+<value>beta</value>
+<value>gamma</value>
+<status status="PASS" start="2026-04-20T14:44:53.198524" elapsed="0.000374"/>
+</for>
+<try>
+<branch type="TRY">
+<msg time="2026-04-20T14:44:53.199018" level="INFO">running a risky block</msg>
+<status status="FAIL" start="2026-04-20T14:44:53.198987" elapsed="0.000057">ValueError: simulated failure inside TRY</status>
+</branch>
+<branch type="EXCEPT" pattern_type="GLOB">
+<pattern>ValueError*</pattern>
+<msg time="2026-04-20T14:44:53.199081" level="WARN">recovered from: simulated failure inside TRY</msg>
+<status status="PASS" start="2026-04-20T14:44:53.199057" elapsed="0.000031"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:44:53.198908" elapsed="0.000185"/>
+</try>
+<status status="PASS" start="2026-04-20T14:44:53.198473" elapsed="0.000623"/>
+</group>
+<msg time="2026-04-20T14:44:53.199103" level="INFO">worker completed nested structures</msg>
+<status status="PASS" start="2026-04-20T14:44:53.197921" elapsed="0.001188"/>
+</kw>
+<msg time="2026-04-20T14:44:53.200318" level="INFO">MainThread: nested worker finished</msg>
+<status status="PASS" start="2026-04-20T14:44:53.197693" elapsed="0.002691"/>
+</kw>
+<doc>The worker uses thread_for / thread_if /
+thread_try context managers. In output.xml the
+resulting &lt;for&gt;, &lt;iter&gt;, &lt;if&gt;, &lt;branch&gt;, &lt;try&gt;
+tags must be present exactly as if they had been
+written from Robot Framework itself.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.196627" elapsed="0.003875"/>
+</test>
+<test id="s1-s2-t3" name="Running Robot Keyword In Thread" line="20">
+<kw name="Run Keyword In Worker Thread" owner="demo_library.DemoLibrary">
+<kw name="Thread 'kw-runner-Log'" owner="ThreadLogger">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:44:53.201623" level="INFO">hello from a background thread</msg>
+<arg>hello from a background thread</arg>
+<status status="PASS" start="2026-04-20T14:44:53.201559" elapsed="0.000067"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:44:53.201220" elapsed="0.000409"/>
+</kw>
+<arg>Log</arg>
+<arg>hello from a background thread</arg>
+<status status="PASS" start="2026-04-20T14:44:53.201080" elapsed="0.000805"/>
+</kw>
+<doc>Calls a Robot Framework library keyword from
+inside a worker thread and records it as a proper
+&lt;kw&gt; element.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.200714" elapsed="0.001270"/>
+</test>
+<test id="s1-s2-t4" name="Parallel Workers With Failure" line="26">
+<kw name="Run Keyword And Expect Error" owner="BuiltIn">
+<kw name="Run Parallel Workers With One Failing" owner="demo_library.DemoLibrary">
+<msg time="2026-04-20T14:44:53.204076" level="INFO">MainThread: starting 3 parallel workers (one will fail)</msg>
+<kw name="Thread 'parallel-ok-a'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.204940" level="INFO">[worker 10] step 0</msg>
+<msg time="2026-04-20T14:44:53.215236" level="INFO">[worker 10] step 1</msg>
+<msg time="2026-04-20T14:44:53.225827" level="INFO">[worker 10] step 2</msg>
+<status status="PASS" start="2026-04-20T14:44:53.204433" elapsed="0.031589"/>
+</kw>
+<kw name="Thread 'parallel-fail'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.205652" level="INFO">worker is about to fail</msg>
+<msg time="2026-04-20T14:44:53.226246" level="INFO">Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Opus4.7\Opus4.6\solution\ThreadLogger.py", line 685, in _runner
+    callable_(*args)
+    ~~~~~~~~~^^^^^^^
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Opus4.7\Opus4.6\tests\demo_library.py", line 204, in _worker_failing
+    raise RuntimeError("intentional failure from worker thread")
+RuntimeError: intentional failure from worker thread</msg>
+<status status="FAIL" start="2026-04-20T14:44:53.205030" elapsed="0.021216">RuntimeError: intentional failure from worker thread</status>
+</kw>
+<kw name="Thread 'parallel-ok-b'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.205873" level="INFO">[worker 20] step 0</msg>
+<msg time="2026-04-20T14:44:53.216143" level="INFO">[worker 20] step 1</msg>
+<msg time="2026-04-20T14:44:53.226377" level="INFO">[worker 20] step 2</msg>
+<status status="PASS" start="2026-04-20T14:44:53.205697" elapsed="0.030944"/>
+</kw>
+<msg time="2026-04-20T14:44:53.237025" level="WARN">Detected worker failure: 1 worker thread(s) ended with an error. First failure in thread 'parallel-fail': RuntimeError: intentional failure from worker thread</msg>
+<msg time="2026-04-20T14:44:53.237232" level="FAIL">1 worker thread(s) ended with an error. First failure in thread 'parallel-fail': RuntimeError: intentional failure from worker thread</msg>
+<status status="FAIL" start="2026-04-20T14:44:53.203928" elapsed="0.033969">1 worker thread(s) ended with an error. First failure in thread 'parallel-fail': RuntimeError: intentional failure from worker thread</status>
+</kw>
+<arg>*intentional failure*</arg>
+<arg>Run Parallel Workers With One Failing</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.203162" elapsed="0.034974"/>
+</kw>
+<doc>Three parallel workers, one fails. The test must
+fail with a clear message but every worker's log
+tree must still be present in output.xml.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.202250" elapsed="0.036009"/>
+</test>
+<doc>Shows that thread logs are captured with ThreadLogger.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.158264" elapsed="0.080258"/>
+</suite>
+<suite id="s1-s3" name="03 Stress And Reversibility" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\Opus4.7\Opus4.6\tests\03_stress_and_reversibility.robot">
+<test id="s1-s3-t1" name="Ten Parallel Workers Do Not Interleave" line="8">
+<kw name="Launch Many Parallel Workers" owner="demo_library.DemoLibrary">
+<msg time="2026-04-20T14:44:53.243022" level="INFO">MainThread: launching 10 parallel workers</msg>
+<kw name="Thread 'stress-0'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.243362" level="INFO">[stress 0] step 0</msg>
+<msg time="2026-04-20T14:44:53.244529" level="INFO">[stress 0] step 1</msg>
+<msg time="2026-04-20T14:44:53.246038" level="INFO">[stress 0] step 2</msg>
+<msg time="2026-04-20T14:44:53.247728" level="INFO">[stress 0] step 3</msg>
+<msg time="2026-04-20T14:44:53.249200" level="INFO">[stress 0] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.243063" elapsed="0.007516"/>
+</kw>
+<kw name="Thread 'stress-1'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.243603" level="INFO">[stress 1] step 0</msg>
+<msg time="2026-04-20T14:44:53.245020" level="INFO">[stress 1] step 1</msg>
+<msg time="2026-04-20T14:44:53.246747" level="INFO">[stress 1] step 2</msg>
+<msg time="2026-04-20T14:44:53.248221" level="INFO">[stress 1] step 3</msg>
+<msg time="2026-04-20T14:44:53.249952" level="INFO">[stress 1] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.243397" elapsed="0.007966"/>
+</kw>
+<kw name="Thread 'stress-2'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.243840" level="INFO">[stress 2] step 0</msg>
+<msg time="2026-04-20T14:44:53.244986" level="INFO">[stress 2] step 1</msg>
+<msg time="2026-04-20T14:44:53.246651" level="INFO">[stress 2] step 2</msg>
+<msg time="2026-04-20T14:44:53.248158" level="INFO">[stress 2] step 3</msg>
+<msg time="2026-04-20T14:44:53.249991" level="INFO">[stress 2] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.243650" elapsed="0.007766"/>
+</kw>
+<kw name="Thread 'stress-3'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.244372" level="INFO">[stress 3] step 0</msg>
+<msg time="2026-04-20T14:44:53.245498" level="INFO">[stress 3] step 1</msg>
+<msg time="2026-04-20T14:44:53.247809" level="INFO">[stress 3] step 2</msg>
+<msg time="2026-04-20T14:44:53.249242" level="INFO">[stress 3] step 3</msg>
+<msg time="2026-04-20T14:44:53.250501" level="INFO">[stress 3] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.243900" elapsed="0.007999"/>
+</kw>
+<kw name="Thread 'stress-4'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.244583" level="INFO">[stress 4] step 0</msg>
+<msg time="2026-04-20T14:44:53.246013" level="INFO">[stress 4] step 1</msg>
+<msg time="2026-04-20T14:44:53.247620" level="INFO">[stress 4] step 2</msg>
+<msg time="2026-04-20T14:44:53.248748" level="INFO">[stress 4] step 3</msg>
+<msg time="2026-04-20T14:44:53.250302" level="INFO">[stress 4] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.244402" elapsed="0.007567"/>
+</kw>
+<kw name="Thread 'stress-5'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.244819" level="INFO">[stress 5] step 0</msg>
+<msg time="2026-04-20T14:44:53.245958" level="INFO">[stress 5] step 1</msg>
+<msg time="2026-04-20T14:44:53.247058" level="INFO">[stress 5] step 2</msg>
+<msg time="2026-04-20T14:44:53.248335" level="INFO">[stress 5] step 3</msg>
+<msg time="2026-04-20T14:44:53.249904" level="INFO">[stress 5] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.244607" elapsed="0.006711"/>
+</kw>
+<kw name="Thread 'stress-6'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.245062" level="INFO">[stress 6] step 0</msg>
+<msg time="2026-04-20T14:44:53.246519" level="INFO">[stress 6] step 1</msg>
+<msg time="2026-04-20T14:44:53.247583" level="INFO">[stress 6] step 2</msg>
+<msg time="2026-04-20T14:44:53.248857" level="INFO">[stress 6] step 3</msg>
+<msg time="2026-04-20T14:44:53.250340" level="INFO">[stress 6] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.244865" elapsed="0.007008"/>
+</kw>
+<kw name="Thread 'stress-7'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.245366" level="INFO">[stress 7] step 0</msg>
+<msg time="2026-04-20T14:44:53.246622" level="INFO">[stress 7] step 1</msg>
+<msg time="2026-04-20T14:44:53.248181" level="INFO">[stress 7] step 2</msg>
+<msg time="2026-04-20T14:44:53.250041" level="INFO">[stress 7] step 3</msg>
+<msg time="2026-04-20T14:44:53.251546" level="INFO">[stress 7] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.245122" elapsed="0.007817"/>
+</kw>
+<kw name="Thread 'stress-8'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.245593" level="INFO">[stress 8] step 0</msg>
+<msg time="2026-04-20T14:44:53.247437" level="INFO">[stress 8] step 1</msg>
+<msg time="2026-04-20T14:44:53.248785" level="INFO">[stress 8] step 2</msg>
+<msg time="2026-04-20T14:44:53.250457" level="INFO">[stress 8] step 3</msg>
+<msg time="2026-04-20T14:44:53.252029" level="INFO">[stress 8] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.245390" elapsed="0.007996"/>
+</kw>
+<kw name="Thread 'stress-9'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.245822" level="INFO">[stress 9] step 0</msg>
+<msg time="2026-04-20T14:44:53.247537" level="INFO">[stress 9] step 1</msg>
+<msg time="2026-04-20T14:44:53.248688" level="INFO">[stress 9] step 2</msg>
+<msg time="2026-04-20T14:44:53.249841" level="INFO">[stress 9] step 3</msg>
+<msg time="2026-04-20T14:44:53.251491" level="INFO">[stress 9] step 4</msg>
+<status status="PASS" start="2026-04-20T14:44:53.245616" elapsed="0.007423"/>
+</kw>
+<msg time="2026-04-20T14:44:53.254409" level="INFO">MainThread: 10 parallel workers joined</msg>
+<arg>10</arg>
+<arg>5</arg>
+<status status="PASS" start="2026-04-20T14:44:53.242926" elapsed="0.011546"/>
+</kw>
+<doc>Ten threads each log five messages. Every message
+must appear under its own Thread wrapper and
+nowhere else.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.242586" elapsed="0.012021"/>
+</test>
+<test id="s1-s3-t2" name="Patches Are Removed After Wait All Threads" line="14">
+<kw name="Launch Many Parallel Workers" owner="demo_library.DemoLibrary">
+<msg time="2026-04-20T14:44:53.255430" level="INFO">MainThread: launching 2 parallel workers</msg>
+<kw name="Thread 'stress-0'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.255869" level="INFO">[stress 0] step 0</msg>
+<status status="PASS" start="2026-04-20T14:44:53.255460" elapsed="0.001518"/>
+</kw>
+<kw name="Thread 'stress-1'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.256413" level="INFO">[stress 1] step 0</msg>
+<status status="PASS" start="2026-04-20T14:44:53.256018" elapsed="0.001596"/>
+</kw>
+<msg time="2026-04-20T14:44:53.257881" level="INFO">MainThread: 2 parallel workers joined</msg>
+<arg>2</arg>
+<arg>1</arg>
+<status status="PASS" start="2026-04-20T14:44:53.255285" elapsed="0.002634"/>
+</kw>
+<kw name="Assert No Patches Installed" owner="reversibility_checks">
+<status status="PASS" start="2026-04-20T14:44:53.257995" elapsed="0.000065"/>
+</kw>
+<doc>Verifies that the monkey-patch on
+librarylogger.write is gone after the worker
+threads have been joined.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.254810" elapsed="0.003321"/>
+</test>
+<test id="s1-s3-t3" name="Logging After Wait Still Works Normally" line="21">
+<kw name="Launch Many Parallel Workers" owner="demo_library.DemoLibrary">
+<msg time="2026-04-20T14:44:53.258642" level="INFO">MainThread: launching 2 parallel workers</msg>
+<kw name="Thread 'stress-0'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.258946" level="INFO">[stress 0] step 0</msg>
+<status status="PASS" start="2026-04-20T14:44:53.258660" elapsed="0.001482"/>
+</kw>
+<kw name="Thread 'stress-1'" owner="ThreadLogger">
+<msg time="2026-04-20T14:44:53.259252" level="INFO">[stress 1] step 0</msg>
+<status status="PASS" start="2026-04-20T14:44:53.258992" elapsed="0.001699"/>
+</kw>
+<msg time="2026-04-20T14:44:53.260874" level="INFO">MainThread: 2 parallel workers joined</msg>
+<arg>2</arg>
+<arg>1</arg>
+<status status="PASS" start="2026-04-20T14:44:53.258562" elapsed="0.002346"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:44:53.261165" level="INFO">After-wait message must show up under the current keyword.</msg>
+<arg>After-wait message must show up under the current keyword.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.260986" elapsed="0.000209"/>
+</kw>
+<doc>Reconfirms zero-interference: logging from the
+MainThread after wait must behave exactly like
+vanilla Robot Framework.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.258272" elapsed="0.002997"/>
+</test>
+<doc>Stress test (many parallel threads) and verification
+that no patch remains installed after Wait All Threads.</doc>
+<status status="PASS" start="2026-04-20T14:44:53.238914" elapsed="0.022534"/>
+</suite>
+<status status="PASS" start="2026-04-20T14:44:53.080236" elapsed="0.181624"/>
+</suite>
+<statistics>
+<total>
+<stat pass="8" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="8" fail="0" skip="0">Tests</stat>
+<stat name="01 Baseline Problem" id="s1-s1" pass="1" fail="0" skip="0">Tests.01 Baseline Problem</stat>
+<stat name="02 Solution" id="s1-s2" pass="4" fail="0" skip="0">Tests.02 Solution</stat>
+<stat name="03 Stress And Reversibility" id="s1-s3" pass="3" fail="0" skip="0">Tests.03 Stress And Reversibility</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-04-20T14:44:53.237025" level="WARN">Detected worker failure: 1 worker thread(s) ended with an error. First failure in thread 'parallel-fail': RuntimeError: intentional failure from worker thread</msg>
+</errors>
+</robot>
