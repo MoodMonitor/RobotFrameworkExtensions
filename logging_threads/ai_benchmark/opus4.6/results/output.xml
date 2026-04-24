@@ -1,0 +1,1259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.13.2 on win32)" generated="2026-04-20T14:32:03.256446" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Thread Logging" source="C:\Users\siluch\Downloads\robot_test\copilot\v2\Opus4.6\test_thread_logging.robot">
+<test id="s1-t1" name="Simple Logging From Threads" line="8">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.374298" level="TRACE">Arguments: [ 'Starting simple logging test from MainThread' ]</msg>
+<msg time="2026-04-20T14:32:03.374822" level="INFO">Starting simple logging test from MainThread</msg>
+<msg time="2026-04-20T14:32:03.374998" level="TRACE">Return: None</msg>
+<arg>Starting simple logging test from MainThread</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.373495" elapsed="0.001595"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.377436" level="TRACE">Arguments: [ 'logger1=helper_lib.simple_log_from_thread' | 'logger2=helper_lib.log_with_delays' ]</msg>
+<msg time="2026-04-20T14:32:03.377922" level="TRACE">Return: {'logger1': 'helper_lib.simple_log_from_thread',
+ 'logger2': 'helper_lib.log_with_delays'}</msg>
+<msg time="2026-04-20T14:32:03.378183" level="INFO">&amp;{threads} = { logger1=helper_lib.simple_log_from_thread | logger2=helper_lib.log_with_delays }</msg>
+<var>&amp;{threads}</var>
+<arg>logger1=helper_lib.simple_log_from_thread</arg>
+<arg>logger2=helper_lib.log_with_delays</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.376806" elapsed="0.001427"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:03.379079" level="TRACE">Arguments: [ logger1='helper_lib.simple_log_from_thread' | logger2='helper_lib.log_with_delays' ]</msg>
+<kw name="Thread: logger1" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.391861" level="INFO">Hello from thread - INFO level</msg>
+<msg time="2026-04-20T14:32:03.391897" level="DEBUG">Hello from thread - DEBUG level</msg>
+<msg time="2026-04-20T14:32:03.391910" level="WARN">Hello from thread - WARN level</msg>
+<msg time="2026-04-20T14:32:03.391919" level="INFO">Thread timestamp test</msg>
+<msg time="2026-04-20T14:32:03.391929" level="INFO" html="true">&lt;b&gt;HTML message from thread&lt;/b&gt;</msg>
+<status status="PASS" start="2026-04-20T14:32:03.379231" elapsed="0.012708"/>
+</kw>
+<kw name="Thread: logger2" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.391757" level="INFO">Delayed message #0 from thread</msg>
+<msg time="2026-04-20T14:32:03.442488" level="INFO">Delayed message #1 from thread</msg>
+<msg time="2026-04-20T14:32:03.492933" level="INFO">Delayed message #2 from thread</msg>
+<msg time="2026-04-20T14:32:03.543545" level="INFO">Delayed message #3 from thread</msg>
+<msg time="2026-04-20T14:32:03.598283" level="INFO">Delayed message #4 from thread</msg>
+<status status="PASS" start="2026-04-20T14:32:03.379288" elapsed="0.269341"/>
+</kw>
+<msg time="2026-04-20T14:32:03.649427" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.378625" elapsed="0.270898"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.651284" level="TRACE">Arguments: [ 'Simple logging test complete' ]</msg>
+<msg time="2026-04-20T14:32:03.651674" level="INFO">Simple logging test complete</msg>
+<msg time="2026-04-20T14:32:03.651746" level="TRACE">Return: None</msg>
+<arg>Simple logging test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.650547" elapsed="0.001256"/>
+</kw>
+<doc>Verify that simple robot.api.logger calls from threads
+are captured and appear in the output.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.371821" elapsed="0.300050"/>
+</test>
+<test id="s1-t2" name="Keyword Execution From Threads" line="18">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.675172" level="TRACE">Arguments: [ 'Starting keyword execution test' ]</msg>
+<msg time="2026-04-20T14:32:03.675296" level="INFO">Starting keyword execution test</msg>
+<msg time="2026-04-20T14:32:03.675348" level="TRACE">Return: None</msg>
+<arg>Starting keyword execution test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.674830" elapsed="0.000567"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.675997" level="TRACE">Arguments: [ 'kw_runner=helper_lib.run_keywords_from_thread' | 'kw_sleeper=helper_lib.run_keyword_with_sleep' ]</msg>
+<msg time="2026-04-20T14:32:03.676198" level="TRACE">Return: {'kw_runner': 'helper_lib.run_keywords_from_thread',
+ 'kw_sleeper': 'helper_lib.run_keyword_with_sleep'}</msg>
+<msg time="2026-04-20T14:32:03.676398" level="INFO">&amp;{threads} = { kw_runner=helper_lib.run_keywords_from_thread | kw_sleeper=helper_lib.run_keyword_with_sleep }</msg>
+<var>&amp;{threads}</var>
+<arg>kw_runner=helper_lib.run_keywords_from_thread</arg>
+<arg>kw_sleeper=helper_lib.run_keyword_with_sleep</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.675731" elapsed="0.000703"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:03.676949" level="TRACE">Arguments: [ kw_runner='helper_lib.run_keywords_from_thread' | kw_sleeper='helper_lib.run_keyword_with_sleep' ]</msg>
+<kw name="Thread: kw_runner" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.691086" level="INFO">Message via BuiltIn.log from thread</msg>
+<msg time="2026-04-20T14:32:03.691137" level="DEBUG">Another message via BuiltIn.log</msg>
+<msg time="2026-04-20T14:32:03.691255" level="INFO">Evaluate result: 6</msg>
+<msg time="2026-04-20T14:32:03.691286" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" start="2026-04-20T14:32:03.677052" elapsed="0.014255"/>
+</kw>
+<kw name="Thread: kw_sleeper" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.687964" level="INFO">Before sleep in thread</msg>
+<msg time="2026-04-20T14:32:03.788652" level="INFO">Slept 100 milliseconds.</msg>
+<msg time="2026-04-20T14:32:03.788699" level="INFO">Testing sleep in thread</msg>
+<msg time="2026-04-20T14:32:03.788724" level="INFO">After sleep in thread</msg>
+<status status="PASS" start="2026-04-20T14:32:03.677088" elapsed="0.111652"/>
+</kw>
+<msg time="2026-04-20T14:32:03.789290" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.676717" elapsed="0.112661"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.790802" level="TRACE">Arguments: [ 'Keyword execution test complete' ]</msg>
+<msg time="2026-04-20T14:32:03.790946" level="INFO">Keyword execution test complete</msg>
+<msg time="2026-04-20T14:32:03.791099" level="TRACE">Return: None</msg>
+<arg>Keyword execution test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.790428" elapsed="0.000762"/>
+</kw>
+<doc>Verify that BuiltIn keyword calls from threads
+are captured with proper structure.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.674095" elapsed="0.118377"/>
+</test>
+<test id="s1-t3" name="Nested Structures In Threads" line="28">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.804307" level="TRACE">Arguments: [ 'Starting nested structures test' ]</msg>
+<msg time="2026-04-20T14:32:03.804468" level="INFO">Starting nested structures test</msg>
+<msg time="2026-04-20T14:32:03.804521" level="TRACE">Return: None</msg>
+<arg>Starting nested structures test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.803809" elapsed="0.000766"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.807108" level="TRACE">Arguments: [ 'for_loop=helper_lib.run_for_loop_in_thread' | 'conditional=helper_lib.run_conditional_in_thread' | 'try_except=helper_lib.run_try_except_in_thread' ]</msg>
+<msg time="2026-04-20T14:32:03.807347" level="TRACE">Return: {'for_loop': 'helper_lib.run_for_loop_in_thread',
+ 'conditional': 'helper_lib.run_conditional_in_thread',
+ 'try_except': 'helper_lib.run_try_except_in_thread'}</msg>
+<msg time="2026-04-20T14:32:03.807564" level="INFO">&amp;{threads} = { for_loop=helper_lib.run_for_loop_in_thread | conditional=helper_lib.run_conditional_in_thread | try_except=helper_lib.run_try_except_in_thread }</msg>
+<var>&amp;{threads}</var>
+<arg>for_loop=helper_lib.run_for_loop_in_thread</arg>
+<arg>conditional=helper_lib.run_conditional_in_thread</arg>
+<arg>try_except=helper_lib.run_try_except_in_thread</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.806547" elapsed="0.001059"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:03.816166" level="TRACE">Arguments: [ for_loop='helper_lib.run_for_loop_in_thread' | conditional='helper_lib.run_conditional_in_thread' | try_except='helper_lib.run_try_except_in_thread' ]</msg>
+<kw name="Thread: for_loop" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.831949" level="INFO">Starting FOR loop simulation in thread</msg>
+<msg time="2026-04-20T14:32:03.832003" level="INFO">FOR iteration 0</msg>
+<msg time="2026-04-20T14:32:03.832140" level="INFO">Computed value: 0</msg>
+<msg time="2026-04-20T14:32:03.832159" level="INFO">FOR iteration 1</msg>
+<msg time="2026-04-20T14:32:03.832199" level="INFO">Computed value: 10</msg>
+<msg time="2026-04-20T14:32:03.832211" level="INFO">FOR iteration 2</msg>
+<msg time="2026-04-20T14:32:03.832258" level="INFO">Computed value: 20</msg>
+<msg time="2026-04-20T14:32:03.832270" level="INFO">FOR loop complete</msg>
+<status status="PASS" start="2026-04-20T14:32:03.816352" elapsed="0.015927"/>
+</kw>
+<kw name="Thread: conditional" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.832411" level="INFO">Evaluated: 2 + 2 = 4</msg>
+<msg time="2026-04-20T14:32:03.832448" level="INFO">Condition TRUE: 2+2 equals 4</msg>
+<msg time="2026-04-20T14:32:03.832472" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" start="2026-04-20T14:32:03.816403" elapsed="0.016086"/>
+</kw>
+<kw name="Thread: try_except" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.832577" level="INFO">Attempting operation that might fail</msg>
+<msg time="2026-04-20T14:32:03.832616" level="DEBUG">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-04-20T14:32:03.832656" level="INFO">First assertion passed</msg>
+<msg time="2026-04-20T14:32:03.832676" level="WARN">Caught expected ZeroDivisionError: division by zero</msg>
+<msg time="2026-04-20T14:32:03.832686" level="INFO">Error handling complete</msg>
+<status status="PASS" start="2026-04-20T14:32:03.816422" elapsed="0.016272"/>
+</kw>
+<msg time="2026-04-20T14:32:03.833230" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.815754" elapsed="0.017588"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.840932" level="TRACE">Arguments: [ 'Nested structures test complete' ]</msg>
+<msg time="2026-04-20T14:32:03.841054" level="INFO">Nested structures test complete</msg>
+<msg time="2026-04-20T14:32:03.841104" level="TRACE">Return: None</msg>
+<arg>Nested structures test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.840581" elapsed="0.000564"/>
+</kw>
+<doc>Verify that FOR loops, IF/ELSE, and TRY/EXCEPT
+executed inside threads preserve their structure.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.796963" elapsed="0.044636"/>
+</test>
+<test id="s1-t4" name="Complex Nested Structures" line="39">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.843827" level="TRACE">Arguments: [ 'Starting complex nested test' ]</msg>
+<msg time="2026-04-20T14:32:03.843952" level="INFO">Starting complex nested test</msg>
+<msg time="2026-04-20T14:32:03.844005" level="TRACE">Return: None</msg>
+<arg>Starting complex nested test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.843466" elapsed="0.000589"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.844910" level="TRACE">Arguments: [ 'complex=helper_lib.run_nested_structures_in_thread' ]</msg>
+<msg time="2026-04-20T14:32:03.845101" level="TRACE">Return: {'complex': 'helper_lib.run_nested_structures_in_thread'}</msg>
+<msg time="2026-04-20T14:32:03.845337" level="INFO">&amp;{threads} = { complex=helper_lib.run_nested_structures_in_thread }</msg>
+<var>&amp;{threads}</var>
+<arg>complex=helper_lib.run_nested_structures_in_thread</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.844602" elapsed="0.000777"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:03.846261" level="TRACE">Arguments: [ complex='helper_lib.run_nested_structures_in_thread' ]</msg>
+<kw name="Thread: complex" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.857714" level="INFO">Starting complex nested execution</msg>
+<msg time="2026-04-20T14:32:03.857763" level="INFO">Outer iteration 0</msg>
+<msg time="2026-04-20T14:32:03.857777" level="INFO">  Even iteration 0: running extra check</msg>
+<msg time="2026-04-20T14:32:03.857912" level="INFO">  No error at iteration 0</msg>
+<msg time="2026-04-20T14:32:03.857928" level="INFO">Outer iteration 1</msg>
+<msg time="2026-04-20T14:32:03.857939" level="INFO">  Odd iteration 1: skipping check</msg>
+<msg time="2026-04-20T14:32:03.857957" level="WARN">  Handled error: Simulated error at iteration 1</msg>
+<msg time="2026-04-20T14:32:03.857967" level="INFO">Outer iteration 2</msg>
+<msg time="2026-04-20T14:32:03.857977" level="INFO">  Even iteration 2: running extra check</msg>
+<msg time="2026-04-20T14:32:03.858027" level="INFO">  No error at iteration 2</msg>
+<msg time="2026-04-20T14:32:03.858040" level="INFO">Complex nested execution complete</msg>
+<status status="PASS" start="2026-04-20T14:32:03.846399" elapsed="0.011650"/>
+</kw>
+<msg time="2026-04-20T14:32:03.858534" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.846002" elapsed="0.012622"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.859486" level="TRACE">Arguments: [ 'Complex nested test complete' ]</msg>
+<msg time="2026-04-20T14:32:03.859624" level="INFO">Complex nested test complete</msg>
+<msg time="2026-04-20T14:32:03.859672" level="TRACE">Return: None</msg>
+<arg>Complex nested test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.859099" elapsed="0.000620"/>
+</kw>
+<doc>Complex nesting: loops with conditionals and error handling.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.842542" elapsed="0.017562"/>
+</test>
+<test id="s1-t5" name="Thread Error Handling" line="47">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.862207" level="TRACE">Arguments: [ 'Starting error handling test' ]</msg>
+<msg time="2026-04-20T14:32:03.862338" level="INFO">Starting error handling test</msg>
+<msg time="2026-04-20T14:32:03.862388" level="TRACE">Return: None</msg>
+<arg>Starting error handling test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.861827" elapsed="0.000610"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.863199" level="TRACE">Arguments: [ 'Run In Threads' | 'failing_thread=helper_lib.thread_that_fails' ]</msg>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:03.863744" level="TRACE">Arguments: [ failing_thread='helper_lib.thread_that_fails' ]</msg>
+<kw name="Thread: failing_thread" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.874770" level="INFO">About to fail...</msg>
+<msg time="2026-04-20T14:32:03.877523" level="ERROR">Thread failing_thread failed:
+Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\copilot\v2\Opus4.6\thread_executor.py", line 421, in _thread_worker
+    func(*args, **kwargs)
+    ~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\siluch\Downloads\robot_test\copilot\v2\Opus4.6\helper_lib.py", line 135, in thread_that_fails
+    raise RuntimeError("Deliberate failure from thread!")
+RuntimeError: Deliberate failure from thread!
+</msg>
+<status status="FAIL" start="2026-04-20T14:32:03.863851" elapsed="0.013704">Deliberate failure from thread!</status>
+</kw>
+<msg time="2026-04-20T14:32:03.878108" level="FAIL">1 thread(s) failed:
+Thread 'failing_thread' failed: Deliberate failure from thread!</msg>
+<msg time="2026-04-20T14:32:03.878762" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\copilot\v2\Opus4.6\thread_executor.py", line 603, in run_in_threads
+    raise AssertionError(
+        f"{len(errors)} thread(s) failed:\n" + "\n".join(msg_parts)
+    )
+AssertionError: 1 thread(s) failed:
+Thread 'failing_thread' failed: Deliberate failure from thread!</msg>
+<arg>failing_thread=helper_lib.thread_that_fails</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="FAIL" start="2026-04-20T14:32:03.863567" elapsed="0.015246">1 thread(s) failed:
+Thread 'failing_thread' failed: Deliberate failure from thread!</status>
+</kw>
+<msg time="2026-04-20T14:32:03.878887" level="TRACE">Return: False</msg>
+<msg time="2026-04-20T14:32:03.878984" level="INFO">${status} = False</msg>
+<var>${status}</var>
+<arg>Run In Threads</arg>
+<arg>failing_thread=helper_lib.thread_that_fails</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.862787" elapsed="0.016221"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.879656" level="TRACE">Arguments: [ False | False ]</msg>
+<msg time="2026-04-20T14:32:03.879739" level="DEBUG">Argument types are:
+&lt;class 'bool'&gt;
+&lt;class 'bool'&gt;</msg>
+<msg time="2026-04-20T14:32:03.879797" level="TRACE">Return: None</msg>
+<arg>${status}</arg>
+<arg>${FALSE}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.879316" elapsed="0.000527"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.880499" level="TRACE">Arguments: [ 'Error handling test complete - failure was caught' ]</msg>
+<msg time="2026-04-20T14:32:03.880733" level="INFO">Error handling test complete - failure was caught</msg>
+<msg time="2026-04-20T14:32:03.880787" level="TRACE">Return: None</msg>
+<arg>Error handling test complete - failure was caught</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.880211" elapsed="0.000672"/>
+</kw>
+<doc>Verify that thread errors are properly reported
+and visible in the output.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.861029" elapsed="0.020795"/>
+</test>
+<test id="s1-t6" name="Partial Failure With Logs" line="56">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.885252" level="TRACE">Arguments: [ 'Starting partial failure test' ]</msg>
+<msg time="2026-04-20T14:32:03.885615" level="INFO">Starting partial failure test</msg>
+<msg time="2026-04-20T14:32:03.885696" level="TRACE">Return: None</msg>
+<arg>Starting partial failure test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.883907" elapsed="0.001846"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.886622" level="TRACE">Arguments: [ 'Run In Threads' | 'partial=helper_lib.thread_partial_success' ]</msg>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:03.887129" level="TRACE">Arguments: [ partial='helper_lib.thread_partial_success' ]</msg>
+<kw name="Thread: partial" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.898502" level="INFO">Step 1: OK</msg>
+<msg time="2026-04-20T14:32:03.898552" level="INFO">Step 2: OK</msg>
+<msg time="2026-04-20T14:32:03.898566" level="INFO">Step 3: About to fail...</msg>
+<msg time="2026-04-20T14:32:03.899430" level="ERROR">Thread partial failed:
+Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\copilot\v2\Opus4.6\thread_executor.py", line 421, in _thread_worker
+    func(*args, **kwargs)
+    ~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\siluch\Downloads\robot_test\copilot\v2\Opus4.6\helper_lib.py", line 144, in thread_partial_success
+    raise RuntimeError("Partial failure after successful steps")
+RuntimeError: Partial failure after successful steps
+</msg>
+<status status="FAIL" start="2026-04-20T14:32:03.887245" elapsed="0.012219">Partial failure after successful steps</status>
+</kw>
+<msg time="2026-04-20T14:32:03.900114" level="FAIL">1 thread(s) failed:
+Thread 'partial' failed: Partial failure after successful steps</msg>
+<msg time="2026-04-20T14:32:03.901001" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\copilot\v2\Opus4.6\thread_executor.py", line 603, in run_in_threads
+    raise AssertionError(
+        f"{len(errors)} thread(s) failed:\n" + "\n".join(msg_parts)
+    )
+AssertionError: 1 thread(s) failed:
+Thread 'partial' failed: Partial failure after successful steps</msg>
+<arg>partial=helper_lib.thread_partial_success</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="FAIL" start="2026-04-20T14:32:03.886920" elapsed="0.014169">1 thread(s) failed:
+Thread 'partial' failed: Partial failure after successful steps</status>
+</kw>
+<msg time="2026-04-20T14:32:03.901209" level="TRACE">Return: False</msg>
+<msg time="2026-04-20T14:32:03.901359" level="INFO">${status} = False</msg>
+<var>${status}</var>
+<arg>Run In Threads</arg>
+<arg>partial=helper_lib.thread_partial_success</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.886235" elapsed="0.015164"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.904277" level="TRACE">Arguments: [ False | False ]</msg>
+<msg time="2026-04-20T14:32:03.904489" level="DEBUG">Argument types are:
+&lt;class 'bool'&gt;
+&lt;class 'bool'&gt;</msg>
+<msg time="2026-04-20T14:32:03.904572" level="TRACE">Return: None</msg>
+<arg>${status}</arg>
+<arg>${FALSE}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.903636" elapsed="0.000998"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.906387" level="TRACE">Arguments: [ 'Partial failure test complete' ]</msg>
+<msg time="2026-04-20T14:32:03.906523" level="INFO">Partial failure test complete</msg>
+<msg time="2026-04-20T14:32:03.906573" level="TRACE">Return: None</msg>
+<arg>Partial failure test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.905999" elapsed="0.000618"/>
+</kw>
+<doc>Verify that logs before a thread failure are preserved.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.883000" elapsed="0.023972"/>
+</test>
+<test id="s1-t7" name="Multiple Concurrent Threads" line="64">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.908763" level="TRACE">Arguments: [ 'Starting multi-thread test' ]</msg>
+<msg time="2026-04-20T14:32:03.908882" level="INFO">Starting multi-thread test</msg>
+<msg time="2026-04-20T14:32:03.908927" level="TRACE">Return: None</msg>
+<arg>Starting multi-thread test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.908430" elapsed="0.000540"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.909631" level="TRACE">Arguments: [ 'worker_0' | 'helper_lib.worker_function' | '0' ]</msg>
+<msg time="2026-04-20T14:32:03.909741" level="TRACE">Return: ['worker_0', 'helper_lib.worker_function', '0']</msg>
+<msg time="2026-04-20T14:32:03.909878" level="INFO">@{t1} = [ worker_0 | helper_lib.worker_function | 0 ]</msg>
+<var>@{t1}</var>
+<arg>worker_0</arg>
+<arg>helper_lib.worker_function</arg>
+<arg>0</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.909338" elapsed="0.000572"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.910612" level="TRACE">Arguments: [ 'worker_1' | 'helper_lib.worker_function' | '1' ]</msg>
+<msg time="2026-04-20T14:32:03.910731" level="TRACE">Return: ['worker_1', 'helper_lib.worker_function', '1']</msg>
+<msg time="2026-04-20T14:32:03.910858" level="INFO">@{t2} = [ worker_1 | helper_lib.worker_function | 1 ]</msg>
+<var>@{t2}</var>
+<arg>worker_1</arg>
+<arg>helper_lib.worker_function</arg>
+<arg>1</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.910258" elapsed="0.000631"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.911512" level="TRACE">Arguments: [ 'worker_2' | 'helper_lib.worker_function' | '2' ]</msg>
+<msg time="2026-04-20T14:32:03.911649" level="TRACE">Return: ['worker_2', 'helper_lib.worker_function', '2']</msg>
+<msg time="2026-04-20T14:32:03.911793" level="INFO">@{t3} = [ worker_2 | helper_lib.worker_function | 2 ]</msg>
+<var>@{t3}</var>
+<arg>worker_2</arg>
+<arg>helper_lib.worker_function</arg>
+<arg>2</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.911213" elapsed="0.000618"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.912380" level="TRACE">Arguments: [ 'worker_3' | 'helper_lib.worker_function' | '3' ]</msg>
+<msg time="2026-04-20T14:32:03.912495" level="TRACE">Return: ['worker_3', 'helper_lib.worker_function', '3']</msg>
+<msg time="2026-04-20T14:32:03.912612" level="INFO">@{t4} = [ worker_3 | helper_lib.worker_function | 3 ]</msg>
+<var>@{t4}</var>
+<arg>worker_3</arg>
+<arg>helper_lib.worker_function</arg>
+<arg>3</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.912111" elapsed="0.000540"/>
+</kw>
+<kw name="Run In Threads With Args" owner="thread_executor">
+<msg time="2026-04-20T14:32:03.913081" level="TRACE">Arguments: [ ['worker_0', 'helper_lib.worker_function', '0'] | ['worker_1', 'helper_lib.worker_function', '1'] | ['worker_2', 'helper_lib.worker_function', '2'] | ['worker_3', 'helper_lib.worker_function', '3'] ]</msg>
+<kw name="Thread: worker_0" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.925129" level="INFO">Worker 0 starting</msg>
+<msg time="2026-04-20T14:32:03.925160" level="INFO">Worker 0: step 0</msg>
+<msg time="2026-04-20T14:32:03.945425" level="INFO">Worker 0: step 1</msg>
+<msg time="2026-04-20T14:32:03.965766" level="INFO">Worker 0: step 2</msg>
+<msg time="2026-04-20T14:32:03.986242" level="INFO">Worker 0 complete</msg>
+<status status="PASS" start="2026-04-20T14:32:03.913235" elapsed="0.073022"/>
+</kw>
+<kw name="Thread: worker_1" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.924676" level="INFO">Worker 1 starting</msg>
+<msg time="2026-04-20T14:32:03.924726" level="INFO">Worker 1: step 0</msg>
+<msg time="2026-04-20T14:32:03.944923" level="INFO">Worker 1: step 1</msg>
+<msg time="2026-04-20T14:32:03.965299" level="INFO">Worker 1: step 2</msg>
+<msg time="2026-04-20T14:32:03.985845" level="INFO">Worker 1 complete</msg>
+<status status="PASS" start="2026-04-20T14:32:03.913289" elapsed="0.072584"/>
+</kw>
+<kw name="Thread: worker_2" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.924766" level="INFO">Worker 2 starting</msg>
+<msg time="2026-04-20T14:32:03.924782" level="INFO">Worker 2: step 0</msg>
+<msg time="2026-04-20T14:32:03.945007" level="INFO">Worker 2: step 1</msg>
+<msg time="2026-04-20T14:32:03.965381" level="INFO">Worker 2: step 2</msg>
+<msg time="2026-04-20T14:32:03.985695" level="INFO">Worker 2 complete</msg>
+<status status="PASS" start="2026-04-20T14:32:03.913316" elapsed="0.072427"/>
+</kw>
+<kw name="Thread: worker_3" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:03.925041" level="INFO">Worker 3 starting</msg>
+<msg time="2026-04-20T14:32:03.925078" level="INFO">Worker 3: step 0</msg>
+<msg time="2026-04-20T14:32:03.945366" level="INFO">Worker 3: step 1</msg>
+<msg time="2026-04-20T14:32:03.965843" level="INFO">Worker 3: step 2</msg>
+<msg time="2026-04-20T14:32:03.986171" level="INFO">Worker 3 complete</msg>
+<status status="PASS" start="2026-04-20T14:32:03.913337" elapsed="0.072858"/>
+</kw>
+<msg time="2026-04-20T14:32:03.986869" level="TRACE">Return: None</msg>
+<arg>${t1}</arg>
+<arg>${t2}</arg>
+<arg>${t3}</arg>
+<arg>${t4}</arg>
+<doc>Run callables with arguments in parallel threads.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.912889" elapsed="0.074065"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.987740" level="TRACE">Arguments: [ 'Multi-thread test complete' ]</msg>
+<msg time="2026-04-20T14:32:03.987829" level="INFO">Multi-thread test complete</msg>
+<msg time="2026-04-20T14:32:03.987864" level="TRACE">Return: None</msg>
+<arg>Multi-thread test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.987388" elapsed="0.000521"/>
+</kw>
+<doc>Verify correct behavior with many parallel threads.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.907751" elapsed="0.080476"/>
+</test>
+<test id="s1-t8" name="Patch Cleanup Verification" line="74">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.989928" level="TRACE">Arguments: [ 'Before threaded execution' ]</msg>
+<msg time="2026-04-20T14:32:03.990048" level="INFO">Before threaded execution</msg>
+<msg time="2026-04-20T14:32:03.990105" level="TRACE">Return: None</msg>
+<arg>Before threaded execution</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.989577" elapsed="0.000576"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:03.990828" level="TRACE">Arguments: [ 'worker=helper_lib.simple_log_from_thread' ]</msg>
+<msg time="2026-04-20T14:32:03.991020" level="TRACE">Return: {'worker': 'helper_lib.simple_log_from_thread'}</msg>
+<msg time="2026-04-20T14:32:03.991190" level="INFO">&amp;{threads} = { worker=helper_lib.simple_log_from_thread }</msg>
+<var>&amp;{threads}</var>
+<arg>worker=helper_lib.simple_log_from_thread</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.990538" elapsed="0.000693"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:03.991795" level="TRACE">Arguments: [ worker='helper_lib.simple_log_from_thread' ]</msg>
+<kw name="Thread: worker" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:04.002666" level="INFO">Hello from thread - INFO level</msg>
+<msg time="2026-04-20T14:32:04.002720" level="DEBUG">Hello from thread - DEBUG level</msg>
+<msg time="2026-04-20T14:32:04.002732" level="WARN">Hello from thread - WARN level</msg>
+<msg time="2026-04-20T14:32:04.002741" level="INFO">Thread timestamp test</msg>
+<msg time="2026-04-20T14:32:04.002749" level="INFO" html="true">&lt;b&gt;HTML message from thread&lt;/b&gt;</msg>
+<status status="PASS" start="2026-04-20T14:32:03.991920" elapsed="0.010836"/>
+</kw>
+<msg time="2026-04-20T14:32:04.003262" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:03.991560" elapsed="0.011814"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.004173" level="TRACE">Arguments: [ 'After threaded execution - testing normal logging' ]</msg>
+<msg time="2026-04-20T14:32:04.004461" level="INFO">After threaded execution - testing normal logging</msg>
+<msg time="2026-04-20T14:32:04.004526" level="TRACE">Return: None</msg>
+<arg>After threaded execution - testing normal logging</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.003830" elapsed="0.000748"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.005238" level="TRACE">Arguments: [ '1 + 1' ]</msg>
+<msg time="2026-04-20T14:32:04.005403" level="TRACE">Return: 2</msg>
+<msg time="2026-04-20T14:32:04.005522" level="INFO">${result} = 2</msg>
+<var>${result}</var>
+<arg>1 + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.004917" elapsed="0.000643"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.006257" level="TRACE">Arguments: [ 2 | '2' ]</msg>
+<msg time="2026-04-20T14:32:04.006366" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-04-20T14:32:04.006434" level="TRACE">Return: None</msg>
+<arg>${result}</arg>
+<arg>2</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.005887" elapsed="0.000592"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.007028" level="TRACE">Arguments: [ 'Normal keyword execution confirmed OK' ]</msg>
+<msg time="2026-04-20T14:32:04.007113" level="INFO">Normal keyword execution confirmed OK</msg>
+<msg time="2026-04-20T14:32:04.007159" level="TRACE">Return: None</msg>
+<arg>Normal keyword execution confirmed OK</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.006754" elapsed="0.000449"/>
+</kw>
+<doc>After threaded execution, verify that normal RF logging
+still works correctly (patches fully reverted).</doc>
+<status status="PASS" start="2026-04-20T14:32:03.988815" elapsed="0.018640"/>
+</test>
+<test id="s1-t9" name="RF FOR Loop In Thread" line="86">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.008898" level="TRACE">Arguments: [ 'Starting RF FOR loop test' ]</msg>
+<msg time="2026-04-20T14:32:04.009013" level="INFO">Starting RF FOR loop test</msg>
+<msg time="2026-04-20T14:32:04.009063" level="TRACE">Return: None</msg>
+<arg>Starting RF FOR loop test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.008593" elapsed="0.000520"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.009672" level="TRACE">Arguments: [ 'for_worker=helper_lib.run_rf_for_keyword_in_thread' ]</msg>
+<msg time="2026-04-20T14:32:04.009865" level="TRACE">Return: {'for_worker': 'helper_lib.run_rf_for_keyword_in_thread'}</msg>
+<msg time="2026-04-20T14:32:04.010024" level="INFO">&amp;{threads} = { for_worker=helper_lib.run_rf_for_keyword_in_thread }</msg>
+<var>&amp;{threads}</var>
+<arg>for_worker=helper_lib.run_rf_for_keyword_in_thread</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.009400" elapsed="0.000665"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:04.010519" level="TRACE">Arguments: [ for_worker='helper_lib.run_rf_for_keyword_in_thread' ]</msg>
+<kw name="Thread: for_worker" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:04.021489" level="INFO">About to run RF FOR keyword from thread</msg>
+<kw name="Keyword With FOR Loop" owner="test_keywords">
+<msg time="2026-04-20T14:32:04.022544" level="TRACE">Arguments: [ ${count}=3 ]</msg>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.028414" level="TRACE">Arguments: [ 'Starting FOR loop with 3 iterations' ]</msg>
+<msg time="2026-04-20T14:32:04.028495" level="INFO">Starting FOR loop with 3 iterations</msg>
+<msg time="2026-04-20T14:32:04.028524" level="TRACE">Return: None</msg>
+<arg>Starting FOR loop with ${count} iterations</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.022864" elapsed="0.005686"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.029305" level="TRACE">Arguments: [ 'FOR iteration 0' ]</msg>
+<msg time="2026-04-20T14:32:04.029376" level="INFO">FOR iteration 0</msg>
+<msg time="2026-04-20T14:32:04.029403" level="TRACE">Return: None</msg>
+<arg>FOR iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.029005" elapsed="0.000423"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.029835" level="TRACE">Arguments: [ '0 * 10' ]</msg>
+<msg time="2026-04-20T14:32:04.029962" level="TRACE">Return: 0</msg>
+<msg time="2026-04-20T14:32:04.030035" level="INFO">${value} = 0</msg>
+<var>${value}</var>
+<arg>${i} * 10</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.029563" elapsed="0.000483"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.030472" level="TRACE">Arguments: [ 'Computed: 0 * 10 = 0' ]</msg>
+<msg time="2026-04-20T14:32:04.030519" level="INFO">Computed: 0 * 10 = 0</msg>
+<msg time="2026-04-20T14:32:04.030539" level="TRACE">Return: None</msg>
+<arg>Computed: ${i} * 10 = ${value}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.030147" elapsed="0.000410"/>
+</kw>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-04-20T14:32:04.028867" elapsed="0.001700"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.030965" level="TRACE">Arguments: [ 'FOR iteration 1' ]</msg>
+<msg time="2026-04-20T14:32:04.031006" level="INFO">FOR iteration 1</msg>
+<msg time="2026-04-20T14:32:04.031025" level="TRACE">Return: None</msg>
+<arg>FOR iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.030770" elapsed="0.000274"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.031328" level="TRACE">Arguments: [ '1 * 10' ]</msg>
+<msg time="2026-04-20T14:32:04.031422" level="TRACE">Return: 10</msg>
+<msg time="2026-04-20T14:32:04.031481" level="INFO">${value} = 10</msg>
+<var>${value}</var>
+<arg>${i} * 10</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.031124" elapsed="0.000365"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.032727" level="TRACE">Arguments: [ 'Computed: 1 * 10 = 10' ]</msg>
+<msg time="2026-04-20T14:32:04.032994" level="INFO">Computed: 1 * 10 = 10</msg>
+<msg time="2026-04-20T14:32:04.033028" level="TRACE">Return: None</msg>
+<arg>Computed: ${i} * 10 = ${value}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.031577" elapsed="0.001555"/>
+</kw>
+<var name="${i}">1</var>
+<status status="PASS" start="2026-04-20T14:32:04.030673" elapsed="0.002478"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.036218" level="TRACE">Arguments: [ 'FOR iteration 2' ]</msg>
+<msg time="2026-04-20T14:32:04.036321" level="INFO">FOR iteration 2</msg>
+<msg time="2026-04-20T14:32:04.036353" level="TRACE">Return: None</msg>
+<arg>FOR iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.035213" elapsed="0.001178"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.037050" level="TRACE">Arguments: [ '2 * 10' ]</msg>
+<msg time="2026-04-20T14:32:04.037209" level="TRACE">Return: 20</msg>
+<msg time="2026-04-20T14:32:04.037297" level="INFO">${value} = 20</msg>
+<var>${value}</var>
+<arg>${i} * 10</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.036579" elapsed="0.000731"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.038740" level="TRACE">Arguments: [ 'Computed: 2 * 10 = 20' ]</msg>
+<msg time="2026-04-20T14:32:04.038830" level="INFO">Computed: 2 * 10 = 20</msg>
+<msg time="2026-04-20T14:32:04.038861" level="TRACE">Return: None</msg>
+<arg>Computed: ${i} * 10 = ${value}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.038196" elapsed="0.000699"/>
+</kw>
+<var name="${i}">2</var>
+<status status="PASS" start="2026-04-20T14:32:04.034930" elapsed="0.003982"/>
+</iter>
+<var>${i}</var>
+<value>${count}</value>
+<status status="PASS" start="2026-04-20T14:32:04.028619" elapsed="0.010308"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.039580" level="TRACE">Arguments: [ 'FOR loop complete' ]</msg>
+<msg time="2026-04-20T14:32:04.039661" level="INFO">FOR loop complete</msg>
+<msg time="2026-04-20T14:32:04.039693" level="TRACE">Return: None</msg>
+<arg>FOR loop complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.039184" elapsed="0.000536"/>
+</kw>
+<msg time="2026-04-20T14:32:04.039779" level="TRACE">Return: None</msg>
+<arg>3</arg>
+<status status="PASS" start="2026-04-20T14:32:04.022165" elapsed="0.017641"/>
+</kw>
+<msg time="2026-04-20T14:32:04.039965" level="INFO">RF FOR keyword complete</msg>
+<status status="PASS" start="2026-04-20T14:32:04.010608" elapsed="0.029378"/>
+</kw>
+<msg time="2026-04-20T14:32:04.041792" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.010340" elapsed="0.031752"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.042986" level="TRACE">Arguments: [ 'RF FOR loop test complete' ]</msg>
+<msg time="2026-04-20T14:32:04.043125" level="INFO">RF FOR loop test complete</msg>
+<msg time="2026-04-20T14:32:04.043179" level="TRACE">Return: None</msg>
+<arg>RF FOR loop test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.042518" elapsed="0.000713"/>
+</kw>
+<doc>Verify that a Robot Framework FOR loop keyword
+executed in a thread preserves native &lt;for&gt; XML tags.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.007915" elapsed="0.035651"/>
+</test>
+<test id="s1-t10" name="RF IF ELSE In Thread" line="95">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.045593" level="TRACE">Arguments: [ 'Starting RF IF/ELSE test' ]</msg>
+<msg time="2026-04-20T14:32:04.045733" level="INFO">Starting RF IF/ELSE test</msg>
+<msg time="2026-04-20T14:32:04.045785" level="TRACE">Return: None</msg>
+<arg>Starting RF IF/ELSE test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.045251" elapsed="0.000584"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.046452" level="TRACE">Arguments: [ 'if_worker=helper_lib.run_rf_if_keyword_in_thread' ]</msg>
+<msg time="2026-04-20T14:32:04.046601" level="TRACE">Return: {'if_worker': 'helper_lib.run_rf_if_keyword_in_thread'}</msg>
+<msg time="2026-04-20T14:32:04.046711" level="INFO">&amp;{threads} = { if_worker=helper_lib.run_rf_if_keyword_in_thread }</msg>
+<var>&amp;{threads}</var>
+<arg>if_worker=helper_lib.run_rf_if_keyword_in_thread</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.046190" elapsed="0.000545"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:04.047110" level="TRACE">Arguments: [ if_worker='helper_lib.run_rf_if_keyword_in_thread' ]</msg>
+<kw name="Thread: if_worker" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:04.058115" level="INFO">About to run RF IF keyword from thread</msg>
+<kw name="Keyword With IF ELSE" owner="test_keywords">
+<msg time="2026-04-20T14:32:04.058947" level="TRACE">Arguments: [ ${value}=5 ]</msg>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.059542" level="TRACE">Arguments: [ 'Evaluating condition for value=5' ]</msg>
+<msg time="2026-04-20T14:32:04.059609" level="INFO">Evaluating condition for value=5</msg>
+<msg time="2026-04-20T14:32:04.059640" level="TRACE">Return: None</msg>
+<arg>Evaluating condition for value=${value}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.059173" elapsed="0.000495"/>
+</kw>
+<if>
+<branch type="IF" condition="${value} &gt; 3">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.060338" level="TRACE">Arguments: [ 'Value 5 is greater than 3' ]</msg>
+<msg time="2026-04-20T14:32:04.060396" level="INFO">Value 5 is greater than 3</msg>
+<msg time="2026-04-20T14:32:04.060422" level="TRACE">Return: None</msg>
+<arg>Value ${value} is greater than 3</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.060051" elapsed="0.000398"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.060806" level="TRACE">Arguments: [ '5 &gt; 3' ]</msg>
+<msg time="2026-04-20T14:32:04.060907" level="TRACE">Return: None</msg>
+<arg>${value} &gt; 3</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.060546" elapsed="0.000387"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:32:04.059755" elapsed="0.001192"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>Value ${value} is 3 or less</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.061090" elapsed="0.000008"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.060969" elapsed="0.000137"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:32:04.059724" elapsed="0.001391"/>
+</if>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.061428" level="TRACE">Arguments: [ 'IF/ELSE complete' ]</msg>
+<msg time="2026-04-20T14:32:04.061478" level="INFO">IF/ELSE complete</msg>
+<msg time="2026-04-20T14:32:04.061502" level="TRACE">Return: None</msg>
+<arg>IF/ELSE complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.061205" elapsed="0.000319"/>
+</kw>
+<msg time="2026-04-20T14:32:04.061561" level="TRACE">Return: None</msg>
+<arg>5</arg>
+<status status="PASS" start="2026-04-20T14:32:04.058616" elapsed="0.002967"/>
+</kw>
+<msg time="2026-04-20T14:32:04.061599" level="INFO">RF IF keyword complete</msg>
+<status status="PASS" start="2026-04-20T14:32:04.047179" elapsed="0.014431"/>
+</kw>
+<msg time="2026-04-20T14:32:04.062627" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.046963" elapsed="0.015737"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.063336" level="TRACE">Arguments: [ 'RF IF/ELSE test complete' ]</msg>
+<msg time="2026-04-20T14:32:04.063453" level="INFO">RF IF/ELSE test complete</msg>
+<msg time="2026-04-20T14:32:04.063501" level="TRACE">Return: None</msg>
+<arg>RF IF/ELSE test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.063041" elapsed="0.000503"/>
+</kw>
+<doc>Verify that RF IF/ELSE keyword preserves native &lt;if&gt; XML tags.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.044702" elapsed="0.019063"/>
+</test>
+<test id="s1-t11" name="RF TRY EXCEPT In Thread" line="103">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.065258" level="TRACE">Arguments: [ 'Starting RF TRY/EXCEPT test' ]</msg>
+<msg time="2026-04-20T14:32:04.065366" level="INFO">Starting RF TRY/EXCEPT test</msg>
+<msg time="2026-04-20T14:32:04.065409" level="TRACE">Return: None</msg>
+<arg>Starting RF TRY/EXCEPT test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.064800" elapsed="0.000800"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.066138" level="TRACE">Arguments: [ 'try_worker=helper_lib.run_rf_try_keyword_in_thread' ]</msg>
+<msg time="2026-04-20T14:32:04.066298" level="TRACE">Return: {'try_worker': 'helper_lib.run_rf_try_keyword_in_thread'}</msg>
+<msg time="2026-04-20T14:32:04.066458" level="INFO">&amp;{threads} = { try_worker=helper_lib.run_rf_try_keyword_in_thread }</msg>
+<var>&amp;{threads}</var>
+<arg>try_worker=helper_lib.run_rf_try_keyword_in_thread</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.065904" elapsed="0.000681"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:04.067513" level="TRACE">Arguments: [ try_worker='helper_lib.run_rf_try_keyword_in_thread' ]</msg>
+<kw name="Thread: try_worker" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:04.079832" level="INFO">About to run RF TRY keyword from thread</msg>
+<kw name="Keyword With TRY EXCEPT" owner="test_keywords">
+<msg time="2026-04-20T14:32:04.080553" level="TRACE">Arguments: [  ]</msg>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.081001" level="TRACE">Arguments: [ 'Starting TRY/EXCEPT block' ]</msg>
+<msg time="2026-04-20T14:32:04.081074" level="INFO">Starting TRY/EXCEPT block</msg>
+<msg time="2026-04-20T14:32:04.081104" level="TRACE">Return: None</msg>
+<arg>Starting TRY/EXCEPT block</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.080708" elapsed="0.000425"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.081596" level="TRACE">Arguments: [ 'Inside TRY block' ]</msg>
+<msg time="2026-04-20T14:32:04.081654" level="INFO">Inside TRY block</msg>
+<msg time="2026-04-20T14:32:04.081678" level="TRACE">Return: None</msg>
+<arg>Inside TRY block</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.081357" elapsed="0.000346"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.082008" level="TRACE">Arguments: [ 'foo' | 'foo' ]</msg>
+<msg time="2026-04-20T14:32:04.082069" level="DEBUG">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-04-20T14:32:04.082106" level="TRACE">Return: None</msg>
+<arg>foo</arg>
+<arg>foo</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.081799" elapsed="0.000333"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.082421" level="TRACE">Arguments: [ 'Assertion passed in TRY' ]</msg>
+<msg time="2026-04-20T14:32:04.082466" level="INFO">Assertion passed in TRY</msg>
+<msg time="2026-04-20T14:32:04.082488" level="TRACE">Return: None</msg>
+<arg>Assertion passed in TRY</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.082228" elapsed="0.000283"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:32:04.081240" elapsed="0.001280"/>
+</branch>
+<branch type="EXCEPT" pattern_type="GLOB">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>Caught exception in EXCEPT</arg>
+<arg>level=WARN</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.082666" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.082569" elapsed="0.000111"/>
+</branch>
+<branch type="FINALLY">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.083015" level="TRACE">Arguments: [ 'Inside FINALLY block' ]</msg>
+<msg time="2026-04-20T14:32:04.083069" level="INFO">Inside FINALLY block</msg>
+<msg time="2026-04-20T14:32:04.083092" level="TRACE">Return: None</msg>
+<arg>Inside FINALLY block</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.082813" elapsed="0.000302"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:32:04.082722" elapsed="0.000402"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:32:04.081183" elapsed="0.001952"/>
+</try>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.083451" level="TRACE">Arguments: [ 'TRY/EXCEPT complete' ]</msg>
+<msg time="2026-04-20T14:32:04.083505" level="INFO">TRY/EXCEPT complete</msg>
+<msg time="2026-04-20T14:32:04.083541" level="TRACE">Return: None</msg>
+<arg>TRY/EXCEPT complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.083212" elapsed="0.000357"/>
+</kw>
+<msg time="2026-04-20T14:32:04.083607" level="TRACE">Return: None</msg>
+<status status="PASS" start="2026-04-20T14:32:04.080329" elapsed="0.003301"/>
+</kw>
+<msg time="2026-04-20T14:32:04.083647" level="INFO">RF TRY keyword complete</msg>
+<status status="PASS" start="2026-04-20T14:32:04.067653" elapsed="0.016005"/>
+</kw>
+<msg time="2026-04-20T14:32:04.084754" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.067217" elapsed="0.017619"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.085711" level="TRACE">Arguments: [ 'RF TRY/EXCEPT test complete' ]</msg>
+<msg time="2026-04-20T14:32:04.085836" level="INFO">RF TRY/EXCEPT test complete</msg>
+<msg time="2026-04-20T14:32:04.085890" level="TRACE">Return: None</msg>
+<arg>RF TRY/EXCEPT test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.085338" elapsed="0.000599"/>
+</kw>
+<doc>Verify that RF TRY/EXCEPT keyword preserves native &lt;try&gt; XML tags.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.064196" elapsed="0.022032"/>
+</test>
+<test id="s1-t12" name="RF Nested Structures In Thread" line="111">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.087733" level="TRACE">Arguments: [ 'Starting RF nested structures test' ]</msg>
+<msg time="2026-04-20T14:32:04.087840" level="INFO">Starting RF nested structures test</msg>
+<msg time="2026-04-20T14:32:04.087887" level="TRACE">Return: None</msg>
+<arg>Starting RF nested structures test</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.087413" elapsed="0.000519"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.089324" level="TRACE">Arguments: [ 'nested_worker=helper_lib.run_rf_nested_keyword_in_thread' ]</msg>
+<msg time="2026-04-20T14:32:04.089505" level="TRACE">Return: {'nested_worker': 'helper_lib.run_rf_nested_keyword_in_thread'}</msg>
+<msg time="2026-04-20T14:32:04.089667" level="INFO">&amp;{threads} = { nested_worker=helper_lib.run_rf_nested_keyword_in_thread }</msg>
+<var>&amp;{threads}</var>
+<arg>nested_worker=helper_lib.run_rf_nested_keyword_in_thread</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.089015" elapsed="0.000691"/>
+</kw>
+<kw name="Run In Threads" owner="thread_executor">
+<msg time="2026-04-20T14:32:04.090198" level="TRACE">Arguments: [ nested_worker='helper_lib.run_rf_nested_keyword_in_thread' ]</msg>
+<kw name="Thread: nested_worker" owner="ThreadExecutor">
+<msg time="2026-04-20T14:32:04.101132" level="INFO">About to run RF nested keyword from thread</msg>
+<kw name="Keyword With Nested Structures" owner="test_keywords">
+<msg time="2026-04-20T14:32:04.102359" level="TRACE">Arguments: [ ${iterations}=4 ]</msg>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.102896" level="TRACE">Arguments: [ 'Starting nested structures' ]</msg>
+<msg time="2026-04-20T14:32:04.102976" level="INFO">Starting nested structures</msg>
+<msg time="2026-04-20T14:32:04.103008" level="TRACE">Return: None</msg>
+<arg>Starting nested structures</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.102602" elapsed="0.000435"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.103912" level="TRACE">Arguments: [ 'Outer FOR iteration 0' ]</msg>
+<msg time="2026-04-20T14:32:04.103970" level="INFO">Outer FOR iteration 0</msg>
+<msg time="2026-04-20T14:32:04.103996" level="TRACE">Return: None</msg>
+<arg>Outer FOR iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.103632" elapsed="0.000389"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} % 2 == 0">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.104551" level="TRACE">Arguments: [ 'Even iteration 0' ]</msg>
+<msg time="2026-04-20T14:32:04.104602" level="INFO">Even iteration 0</msg>
+<msg time="2026-04-20T14:32:04.104624" level="TRACE">Return: None</msg>
+<arg>Even iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.104309" elapsed="0.000339"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.105069" level="TRACE">Arguments: [ '100 / (0 + 1)' ]</msg>
+<msg time="2026-04-20T14:32:04.105188" level="TRACE">Return: 100.0</msg>
+<msg time="2026-04-20T14:32:04.105259" level="INFO">${result} = 100.0</msg>
+<var>${result}</var>
+<arg>100 / (${i} + 1)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.104819" elapsed="0.000452"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.105613" level="TRACE">Arguments: [ 'Division result: 100.0' ]</msg>
+<msg time="2026-04-20T14:32:04.105662" level="INFO">Division result: 100.0</msg>
+<msg time="2026-04-20T14:32:04.105684" level="TRACE">Return: None</msg>
+<arg>Division result: ${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.105364" elapsed="0.000343"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:32:04.104718" elapsed="0.000998"/>
+</branch>
+<branch type="EXCEPT" pattern_type="GLOB">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>Division failed for iteration ${i}</arg>
+<arg>level=WARN</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.105846" elapsed="0.000008"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.105753" elapsed="0.000107"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:32:04.104680" elapsed="0.001199"/>
+</try>
+<status status="PASS" start="2026-04-20T14:32:04.104075" elapsed="0.001815"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>Odd iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.105993" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.105902" elapsed="0.000104"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:32:04.104059" elapsed="0.001955"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2026-04-20T14:32:04.103507" elapsed="0.002523"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.106585" level="TRACE">Arguments: [ 'Outer FOR iteration 1' ]</msg>
+<msg time="2026-04-20T14:32:04.106633" level="INFO">Outer FOR iteration 1</msg>
+<msg time="2026-04-20T14:32:04.106655" level="TRACE">Return: None</msg>
+<arg>Outer FOR iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.106342" elapsed="0.000335"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} % 2 == 0">
+<kw name="Log" owner="BuiltIn">
+<arg>Even iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.106912" elapsed="0.000008"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${result}</var>
+<arg>100 / (${i} + 1)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.107063" elapsed="0.000006"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Division result: ${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.107152" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.106974" elapsed="0.000192"/>
+</branch>
+<branch type="EXCEPT" pattern_type="GLOB">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>Division failed for iteration ${i}</arg>
+<arg>level=WARN</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.107272" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.107193" elapsed="0.000092"/>
+</branch>
+<status status="NOT RUN" start="2026-04-20T14:32:04.106943" elapsed="0.000357"/>
+</try>
+<status status="NOT RUN" start="2026-04-20T14:32:04.106718" elapsed="0.000592"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.107678" level="TRACE">Arguments: [ 'Odd iteration 1' ]</msg>
+<msg time="2026-04-20T14:32:04.107736" level="INFO">Odd iteration 1</msg>
+<msg time="2026-04-20T14:32:04.107761" level="TRACE">Return: None</msg>
+<arg>Odd iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.107408" elapsed="0.000378"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:32:04.107319" elapsed="0.000477"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:32:04.106704" elapsed="0.001101"/>
+</if>
+<var name="${i}">1</var>
+<status status="PASS" start="2026-04-20T14:32:04.106260" elapsed="0.001560"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.108413" level="TRACE">Arguments: [ 'Outer FOR iteration 2' ]</msg>
+<msg time="2026-04-20T14:32:04.108470" level="INFO">Outer FOR iteration 2</msg>
+<msg time="2026-04-20T14:32:04.108494" level="TRACE">Return: None</msg>
+<arg>Outer FOR iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.108152" elapsed="0.000365"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} % 2 == 0">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.109023" level="TRACE">Arguments: [ 'Even iteration 2' ]</msg>
+<msg time="2026-04-20T14:32:04.109072" level="INFO">Even iteration 2</msg>
+<msg time="2026-04-20T14:32:04.109093" level="TRACE">Return: None</msg>
+<arg>Even iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.108791" elapsed="0.000323"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.109538" level="TRACE">Arguments: [ '100 / (2 + 1)' ]</msg>
+<msg time="2026-04-20T14:32:04.109651" level="TRACE">Return: 33.333333333333336</msg>
+<msg time="2026-04-20T14:32:04.109730" level="INFO">${result} = 33.333333333333336</msg>
+<var>${result}</var>
+<arg>100 / (${i} + 1)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.109293" elapsed="0.000449"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.110255" level="TRACE">Arguments: [ 'Division result: 33.333333333333336' ]</msg>
+<msg time="2026-04-20T14:32:04.110540" level="INFO">Division result: 33.333333333333336</msg>
+<msg time="2026-04-20T14:32:04.110592" level="TRACE">Return: None</msg>
+<arg>Division result: ${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.109838" elapsed="0.000805"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:32:04.109194" elapsed="0.001474"/>
+</branch>
+<branch type="EXCEPT" pattern_type="GLOB">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>Division failed for iteration ${i}</arg>
+<arg>level=WARN</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.110852" elapsed="0.000010"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.110722" elapsed="0.000171"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:32:04.109167" elapsed="0.001753"/>
+</try>
+<status status="PASS" start="2026-04-20T14:32:04.108563" elapsed="0.002370"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>Odd iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.111357" elapsed="0.000011"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.111129" elapsed="0.000249"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:32:04.108548" elapsed="0.002840"/>
+</if>
+<var name="${i}">2</var>
+<status status="PASS" start="2026-04-20T14:32:04.108057" elapsed="0.003352"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.112438" level="TRACE">Arguments: [ 'Outer FOR iteration 3' ]</msg>
+<msg time="2026-04-20T14:32:04.112567" level="INFO">Outer FOR iteration 3</msg>
+<msg time="2026-04-20T14:32:04.112604" level="TRACE">Return: None</msg>
+<arg>Outer FOR iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.112054" elapsed="0.000581"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} % 2 == 0">
+<kw name="Log" owner="BuiltIn">
+<arg>Even iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.113001" elapsed="0.000010"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${result}</var>
+<arg>100 / (${i} + 1)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.113173" elapsed="0.000009"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Division result: ${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.113262" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.113072" elapsed="0.000204"/>
+</branch>
+<branch type="EXCEPT" pattern_type="GLOB">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>Division failed for iteration ${i}</arg>
+<arg>level=WARN</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:32:04.113387" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:32:04.113306" elapsed="0.000095"/>
+</branch>
+<status status="NOT RUN" start="2026-04-20T14:32:04.113043" elapsed="0.000374"/>
+</try>
+<status status="NOT RUN" start="2026-04-20T14:32:04.112703" elapsed="0.000725"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.113869" level="TRACE">Arguments: [ 'Odd iteration 3' ]</msg>
+<msg time="2026-04-20T14:32:04.113956" level="INFO">Odd iteration 3</msg>
+<msg time="2026-04-20T14:32:04.113986" level="TRACE">Return: None</msg>
+<arg>Odd iteration ${i}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.113530" elapsed="0.000482"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:32:04.113438" elapsed="0.000584"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:32:04.112682" elapsed="0.001350"/>
+</if>
+<var name="${i}">3</var>
+<status status="PASS" start="2026-04-20T14:32:04.111909" elapsed="0.002141"/>
+</iter>
+<var>${i}</var>
+<value>${iterations}</value>
+<status status="PASS" start="2026-04-20T14:32:04.103097" elapsed="0.010963"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.114393" level="TRACE">Arguments: [ 'Nested structures complete' ]</msg>
+<msg time="2026-04-20T14:32:04.114446" level="INFO">Nested structures complete</msg>
+<msg time="2026-04-20T14:32:04.114470" level="TRACE">Return: None</msg>
+<arg>Nested structures complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.114166" elapsed="0.000328"/>
+</kw>
+<msg time="2026-04-20T14:32:04.114526" level="TRACE">Return: None</msg>
+<arg>4</arg>
+<status status="PASS" start="2026-04-20T14:32:04.101943" elapsed="0.012605"/>
+</kw>
+<msg time="2026-04-20T14:32:04.114566" level="INFO">RF nested keyword complete</msg>
+<status status="PASS" start="2026-04-20T14:32:04.090296" elapsed="0.024280"/>
+</kw>
+<msg time="2026-04-20T14:32:04.118459" level="TRACE">Return: None</msg>
+<arg>&amp;{threads}</arg>
+<doc>Run callables in parallel threads with isolated logging.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.089986" elapsed="0.028573"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:32:04.119935" level="TRACE">Arguments: [ 'RF nested structures test complete' ]</msg>
+<msg time="2026-04-20T14:32:04.120027" level="INFO">RF nested structures test complete</msg>
+<msg time="2026-04-20T14:32:04.120062" level="TRACE">Return: None</msg>
+<arg>RF nested structures test complete</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.119275" elapsed="0.000819"/>
+</kw>
+<doc>Verify that complex nested RF structures (FOR+IF+TRY)
+are fully preserved with native XML tags in thread output.</doc>
+<status status="PASS" start="2026-04-20T14:32:04.086804" elapsed="0.033608"/>
+</test>
+<status status="PASS" start="2026-04-20T14:32:03.258783" elapsed="0.862546"/>
+</suite>
+<statistics>
+<total>
+<stat pass="12" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Thread Logging" id="s1" pass="12" fail="0" skip="0">Test Thread Logging</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

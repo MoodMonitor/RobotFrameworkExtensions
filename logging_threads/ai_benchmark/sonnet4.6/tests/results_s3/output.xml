@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.13.2 on win32)" generated="2026-04-20T10:25:31.582639" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Scenario3 Nested" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\test_scenario3_nested.robot">
+<test id="s1-t1" name="S3-TC1: RF FOR Loop Nodes Preserved In Thread Result" line="18">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.665832" level="INFO">@{kw1} = [ User KW With RF FOR Loop | Thread-1 | alpha | beta | gamma ]</msg>
+<var>@{kw1}</var>
+<arg>User KW With RF FOR Loop</arg>
+<arg>${T1}</arg>
+<arg>alpha</arg>
+<arg>beta</arg>
+<arg>gamma</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.665057" elapsed="0.000815"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.666979" level="INFO">@{kw2} = [ User KW With RF FOR Loop | Thread-2 | 1 | 2 | 3 | 4 ]</msg>
+<var>@{kw2}</var>
+<arg>User KW With RF FOR Loop</arg>
+<arg>${T2}</arg>
+<arg>1</arg>
+<arg>2</arg>
+<arg>3</arg>
+<arg>4</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.666626" elapsed="0.000382"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] User KW With RF FOR Loop" owner="ThreadLogger">
+<kw name="User KW With RF FOR Loop" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.669259" level="INFO">[Thread-1] RF FOR loop starting</msg>
+<arg>[${thread_id}] RF FOR loop starting</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.669050" elapsed="0.000238"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.669673" level="INFO">[Thread-1] RF FOR item: alpha</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.669499" elapsed="0.000199"/>
+</kw>
+<var name="${item}">alpha</var>
+<status status="PASS" start="2026-04-20T10:25:31.669437" elapsed="0.000270"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.669959" level="INFO">[Thread-1] RF FOR item: beta</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.669803" elapsed="0.000178"/>
+</kw>
+<var name="${item}">beta</var>
+<status status="PASS" start="2026-04-20T10:25:31.669752" elapsed="0.000238"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.670243" level="INFO">[Thread-1] RF FOR item: gamma</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.670084" elapsed="0.000180"/>
+</kw>
+<var name="${item}">gamma</var>
+<status status="PASS" start="2026-04-20T10:25:31.670032" elapsed="0.000240"/>
+</iter>
+<var>${item}</var>
+<value>@{items}</value>
+<status status="PASS" start="2026-04-20T10:25:31.669323" elapsed="0.000957"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.670468" level="INFO">[Thread-1] RF FOR loop done</msg>
+<arg>[${thread_id}] RF FOR loop done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.670332" elapsed="0.000156"/>
+</kw>
+<arg>Thread-1</arg>
+<arg>alpha</arg>
+<arg>beta</arg>
+<arg>gamma</arg>
+<doc>RF FOR loop – produces FOR+ITER nodes in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.668758" elapsed="0.001760"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.667209" elapsed="0.003318"/>
+</kw>
+<kw name="[Thread 2] User KW With RF FOR Loop" owner="ThreadLogger">
+<kw name="User KW With RF FOR Loop" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.671328" level="INFO">[Thread-2] RF FOR loop starting</msg>
+<arg>[${thread_id}] RF FOR loop starting</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.671149" elapsed="0.000206"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.671673" level="INFO">[Thread-2] RF FOR item: 1</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.671516" elapsed="0.000179"/>
+</kw>
+<var name="${item}">1</var>
+<status status="PASS" start="2026-04-20T10:25:31.671465" elapsed="0.000238"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.671934" level="INFO">[Thread-2] RF FOR item: 2</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.671789" elapsed="0.000165"/>
+</kw>
+<var name="${item}">2</var>
+<status status="PASS" start="2026-04-20T10:25:31.671742" elapsed="0.000220"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.672184" level="INFO">[Thread-2] RF FOR item: 3</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.672043" elapsed="0.000160"/>
+</kw>
+<var name="${item}">3</var>
+<status status="PASS" start="2026-04-20T10:25:31.671999" elapsed="0.000212"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.672432" level="INFO">[Thread-2] RF FOR item: 4</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.672291" elapsed="0.000160"/>
+</kw>
+<var name="${item}">4</var>
+<status status="PASS" start="2026-04-20T10:25:31.672245" elapsed="0.000214"/>
+</iter>
+<var>${item}</var>
+<value>@{items}</value>
+<status status="PASS" start="2026-04-20T10:25:31.671380" elapsed="0.001086"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.672670" level="INFO">[Thread-2] RF FOR loop done</msg>
+<arg>[${thread_id}] RF FOR loop done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.672526" elapsed="0.000165"/>
+</kw>
+<arg>Thread-2</arg>
+<arg>1</arg>
+<arg>2</arg>
+<arg>3</arg>
+<arg>4</arg>
+<doc>RF FOR loop – produces FOR+ITER nodes in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.670928" elapsed="0.001789"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.667217" elapsed="0.005507"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.667112" elapsed="0.006239"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.673618" level="INFO">RF FOR nodes preserved in both thread wrappers</msg>
+<arg>RF FOR nodes preserved in both thread wrappers</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.673444" elapsed="0.000203"/>
+</kw>
+<doc>Two threads each run a user keyword that contains
+a Robot Framework FOR loop.
+The output.xml must contain for/iter nodes under each
+thread wrapper – not just flat log messages.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.664052" elapsed="0.009678"/>
+</test>
+<test id="s1-t2" name="S3-TC2: RF IF Branch Nodes Preserved In Thread Result" line="28">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.674646" level="INFO">@{kw1} = [ User KW With RF IF Branch | Thread-1 | 150 ]</msg>
+<var>@{kw1}</var>
+<arg>User KW With RF IF Branch</arg>
+<arg>${T1}</arg>
+<arg>150</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.674290" elapsed="0.000391"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.675126" level="INFO">@{kw2} = [ User KW With RF IF Branch | Thread-2 | 5 ]</msg>
+<var>@{kw2}</var>
+<arg>User KW With RF IF Branch</arg>
+<arg>${T2}</arg>
+<arg>5</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.674800" elapsed="0.000595"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] User KW With RF IF Branch" owner="ThreadLogger">
+<kw name="User KW With RF IF Branch" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.679057" level="INFO">[Thread-1] RF IF starting with value=150</msg>
+<arg>[${thread_id}] RF IF starting with value=${value}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.678700" elapsed="0.000396"/>
+</kw>
+<if>
+<branch type="IF" condition="${value} &gt; 100">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.679700" level="INFO">[Thread-1] Branch: very large (150 &gt; 100)</msg>
+<arg>[${thread_id}] Branch: very large (${value} &gt; 100)</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.679405" elapsed="0.000330"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.679174" elapsed="0.000575"/>
+</branch>
+<branch type="ELSE IF" condition="${value} &gt; 10">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Branch: medium (${value} &gt; 10)</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.679856" elapsed="0.000011"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.679769" elapsed="0.000106"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Branch: small (${value} &lt;= 10)</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.679936" elapsed="0.000008"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.679884" elapsed="0.000067"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.679144" elapsed="0.000814"/>
+</if>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.680190" level="INFO">[Thread-1] RF IF done</msg>
+<arg>[${thread_id}] RF IF done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.680007" elapsed="0.000206"/>
+</kw>
+<arg>Thread-1</arg>
+<arg>150</arg>
+<doc>RF IF/ELSE IF/ELSE – produces IF+BRANCH nodes in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.678335" elapsed="0.001905"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.676074" elapsed="0.004175"/>
+</kw>
+<kw name="[Thread 2] User KW With RF IF Branch" owner="ThreadLogger">
+<kw name="User KW With RF IF Branch" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.681366" level="INFO">[Thread-2] RF IF starting with value=5</msg>
+<arg>[${thread_id}] RF IF starting with value=${value}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.680852" elapsed="0.000539"/>
+</kw>
+<if>
+<branch type="IF" condition="${value} &gt; 100">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Branch: very large (${value} &gt; 100)</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.681559" elapsed="0.000009"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.681433" elapsed="0.000142"/>
+</branch>
+<branch type="ELSE IF" condition="${value} &gt; 10">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Branch: medium (${value} &gt; 10)</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.681681" elapsed="0.000009"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.681585" elapsed="0.000112"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.681970" level="INFO">[Thread-2] Branch: small (5 &lt;= 10)</msg>
+<arg>[${thread_id}] Branch: small (${value} &lt;= 10)</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.681751" elapsed="0.000245"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.681705" elapsed="0.000299"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.681418" elapsed="0.000596"/>
+</if>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.682252" level="INFO">[Thread-2] RF IF done</msg>
+<arg>[${thread_id}] RF IF done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.682069" elapsed="0.000205"/>
+</kw>
+<arg>Thread-2</arg>
+<arg>5</arg>
+<doc>RF IF/ELSE IF/ELSE – produces IF+BRANCH nodes in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.680666" elapsed="0.001634"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.676086" elapsed="0.006222"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.675675" elapsed="0.007253"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.683211" level="INFO">RF IF/ELSE branch nodes preserved in both thread wrappers</msg>
+<arg>RF IF/ELSE branch nodes preserved in both thread wrappers</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.683034" elapsed="0.000210"/>
+</kw>
+<doc>Two threads each run a user keyword with RF IF/ELSE IF/ELSE.
+Different branches are taken (values 150 and 5).
+The output.xml must contain if/branch nodes per thread.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.673909" elapsed="0.009422"/>
+</test>
+<test id="s1-t3" name="S3-TC3: RF TRY EXCEPT Nodes Preserved In Thread Result" line="37">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.684202" level="INFO">@{kw1} = [ User KW With RF TRY EXCEPT | Thread-1 | false ]</msg>
+<var>@{kw1}</var>
+<arg>User KW With RF TRY EXCEPT</arg>
+<arg>${T1}</arg>
+<arg>false</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.683853" elapsed="0.000382"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.684569" level="INFO">@{kw2} = [ User KW With RF TRY EXCEPT | Thread-2 | true ]</msg>
+<var>@{kw2}</var>
+<arg>User KW With RF TRY EXCEPT</arg>
+<arg>${T2}</arg>
+<arg>true</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.684336" elapsed="0.000259"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] User KW With RF TRY EXCEPT" owner="ThreadLogger">
+<kw name="User KW With RF TRY EXCEPT" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.686424" level="INFO">[Thread-1] RF TRY starting</msg>
+<arg>[${thread_id}] RF TRY starting</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.686186" elapsed="0.000266"/>
+</kw>
+<try>
+<branch type="TRY">
+<if>
+<branch type="IF" condition="'${should_fail}' == 'true'">
+<kw name="Fail" owner="BuiltIn">
+<arg>Deliberate failure in ${thread_id}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.686701" elapsed="0.000011"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.686557" elapsed="0.000163"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.686546" elapsed="0.000185"/>
+</if>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.686948" level="INFO">[Thread-1] TRY block succeeded</msg>
+<arg>[${thread_id}] TRY block succeeded</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.686780" elapsed="0.000192"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.686521" elapsed="0.000459"/>
+</branch>
+<branch type="EXCEPT" pattern_type="GLOB">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] EXCEPT block caught error</arg>
+<arg>level=WARN</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.687056" elapsed="0.000009"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.687006" elapsed="0.000066"/>
+</branch>
+<branch type="FINALLY">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.687284" level="INFO">[Thread-1] FINALLY block always runs</msg>
+<arg>[${thread_id}] FINALLY block always runs</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.687141" elapsed="0.000163"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.687095" elapsed="0.000216"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.686485" elapsed="0.000835"/>
+</try>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.687499" level="INFO">[Thread-1] RF TRY done</msg>
+<arg>[${thread_id}] RF TRY done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.687365" elapsed="0.000154"/>
+</kw>
+<arg>Thread-1</arg>
+<arg>false</arg>
+<doc>RF TRY/EXCEPT/FINALLY – produces TRY+BRANCH nodes in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.685754" elapsed="0.001788"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.684901" elapsed="0.002649"/>
+</kw>
+<kw name="[Thread 2] User KW With RF TRY EXCEPT" owner="ThreadLogger">
+<kw name="User KW With RF TRY EXCEPT" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.688465" level="INFO">[Thread-2] RF TRY starting</msg>
+<arg>[${thread_id}] RF TRY starting</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.688278" elapsed="0.000213"/>
+</kw>
+<try>
+<branch type="TRY">
+<if>
+<branch type="IF" condition="'${should_fail}' == 'true'">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.688926" level="FAIL">Deliberate failure in Thread-2</msg>
+<msg time="2026-04-20T10:25:31.689016" level="DEBUG">Traceback (most recent call last):
+  None
+AssertionError: Deliberate failure in Thread-2</msg>
+<arg>Deliberate failure in ${thread_id}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2026-04-20T10:25:31.688685" elapsed="0.000343">Deliberate failure in Thread-2</status>
+</kw>
+<status status="FAIL" start="2026-04-20T10:25:31.688566" elapsed="0.000498">Deliberate failure in Thread-2</status>
+</branch>
+<status status="FAIL" start="2026-04-20T10:25:31.688557" elapsed="0.000522">Deliberate failure in Thread-2</status>
+</if>
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] TRY block succeeded</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.689143" elapsed="0.000010"/>
+</kw>
+<status status="FAIL" start="2026-04-20T10:25:31.688537" elapsed="0.000635">Deliberate failure in Thread-2</status>
+</branch>
+<branch type="EXCEPT" pattern_type="GLOB">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.689545" level="WARN">[Thread-2] EXCEPT block caught error</msg>
+<arg>[${thread_id}] EXCEPT block caught error</arg>
+<arg>level=WARN</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.689325" elapsed="0.000322"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.689271" elapsed="0.000386"/>
+</branch>
+<branch type="FINALLY">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.689915" level="INFO">[Thread-2] FINALLY block always runs</msg>
+<arg>[${thread_id}] FINALLY block always runs</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.689743" elapsed="0.000194"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.689684" elapsed="0.000262"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.688514" elapsed="0.001441"/>
+</try>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.690147" level="INFO">[Thread-2] RF TRY done</msg>
+<arg>[${thread_id}] RF TRY done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.690006" elapsed="0.000162"/>
+</kw>
+<arg>Thread-2</arg>
+<arg>true</arg>
+<doc>RF TRY/EXCEPT/FINALLY – produces TRY+BRANCH nodes in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.688057" elapsed="0.002135"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.684908" elapsed="0.005291"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.684698" elapsed="0.006395"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.691557" level="INFO">RF TRY/EXCEPT/FINALLY nodes preserved in both thread wrappers</msg>
+<arg>RF TRY/EXCEPT/FINALLY nodes preserved in both thread wrappers</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.691255" elapsed="0.000361"/>
+</kw>
+<doc>Thread 1 follows the TRY path (no error),
+Thread 2 triggers the EXCEPT path.
+Both FINALLY blocks must also appear in output.xml.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.683507" elapsed="0.008248"/>
+</test>
+<test id="s1-t4" name="S3-TC4: Deeply Nested FOR With IF Preserved In Thread Result" line="46">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.694534" level="INFO">@{kw1} = [ User KW With Nested FOR And IF | Thread-1 | 1 | -2 | 3 | -4 ]</msg>
+<var>@{kw1}</var>
+<arg>User KW With Nested FOR And IF</arg>
+<arg>${T1}</arg>
+<arg>1</arg>
+<arg>-2</arg>
+<arg>3</arg>
+<arg>-4</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.693471" elapsed="0.001123"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.695399" level="INFO">@{kw2} = [ User KW With Nested FOR And IF | Thread-2 | 10 | 20 | -5 ]</msg>
+<var>@{kw2}</var>
+<arg>User KW With Nested FOR And IF</arg>
+<arg>${T2}</arg>
+<arg>10</arg>
+<arg>20</arg>
+<arg>-5</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.694822" elapsed="0.000621"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] User KW With Nested FOR And IF" owner="ThreadLogger">
+<kw name="User KW With Nested FOR And IF" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.697352" level="INFO">[Thread-1] Nested FOR+IF starting</msg>
+<arg>[${thread_id}] Nested FOR+IF starting</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.696862" elapsed="0.000538"/>
+</kw>
+<for flavor="IN">
+<iter>
+<if>
+<branch type="IF" condition="${val} &gt; 0">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.698240" level="INFO">[Thread-1] Positive: 1</msg>
+<arg>[${thread_id}] Positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.697991" elapsed="0.000279"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.697786" elapsed="0.000495"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Non-positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.698360" elapsed="0.000011"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.698294" elapsed="0.000085"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.697771" elapsed="0.000616"/>
+</if>
+<var name="${val}">1</var>
+<status status="PASS" start="2026-04-20T10:25:31.697730" elapsed="0.000670"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="${val} &gt; 0">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.698640" elapsed="0.000010"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.698527" elapsed="0.000130"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.698895" level="INFO">[Thread-1] Non-positive: -2</msg>
+<arg>[${thread_id}] Non-positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.698715" elapsed="0.000204"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.698666" elapsed="0.000262"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.698515" elapsed="0.000421"/>
+</if>
+<var name="${val}">-2</var>
+<status status="PASS" start="2026-04-20T10:25:31.698492" elapsed="0.000453"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="${val} &gt; 0">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.699457" level="INFO">[Thread-1] Positive: 3</msg>
+<arg>[${thread_id}] Positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.699207" elapsed="0.000289"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.699055" elapsed="0.000457"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Non-positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.699608" elapsed="0.000010"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.699532" elapsed="0.000096"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.699045" elapsed="0.000594"/>
+</if>
+<var name="${val}">3</var>
+<status status="PASS" start="2026-04-20T10:25:31.699023" elapsed="0.000630"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="${val} &gt; 0">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.699954" elapsed="0.000016"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.699804" elapsed="0.000179"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.700253" level="INFO">[Thread-1] Non-positive: -4</msg>
+<arg>[${thread_id}] Non-positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.700054" elapsed="0.000224"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.699998" elapsed="0.000288"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.699789" elapsed="0.000504"/>
+</if>
+<var name="${val}">-4</var>
+<status status="PASS" start="2026-04-20T10:25:31.699764" elapsed="0.000538"/>
+</iter>
+<var>${val}</var>
+<value>@{values}</value>
+<status status="PASS" start="2026-04-20T10:25:31.697482" elapsed="0.002826"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.700519" level="INFO">[Thread-1] Nested FOR+IF done</msg>
+<arg>[${thread_id}] Nested FOR+IF done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.700356" elapsed="0.000188"/>
+</kw>
+<arg>Thread-1</arg>
+<arg>1</arg>
+<arg>-2</arg>
+<arg>3</arg>
+<arg>-4</arg>
+<doc>FOR loop containing IF branch – deep nesting in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.696355" elapsed="0.004217"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.695695" elapsed="0.004885"/>
+</kw>
+<kw name="[Thread 2] User KW With Nested FOR And IF" owner="ThreadLogger">
+<kw name="User KW With Nested FOR And IF" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.701628" level="INFO">[Thread-2] Nested FOR+IF starting</msg>
+<arg>[${thread_id}] Nested FOR+IF starting</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.701434" elapsed="0.000228"/>
+</kw>
+<for flavor="IN">
+<iter>
+<if>
+<branch type="IF" condition="${val} &gt; 0">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.702281" level="INFO">[Thread-2] Positive: 10</msg>
+<arg>[${thread_id}] Positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.702022" elapsed="0.000294"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.701855" elapsed="0.000476"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Non-positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.702439" elapsed="0.000015"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.702348" elapsed="0.000117"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.701838" elapsed="0.000638"/>
+</if>
+<var name="${val}">10</var>
+<status status="PASS" start="2026-04-20T10:25:31.701811" elapsed="0.000681"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="${val} &gt; 0">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.707312" level="INFO">[Thread-2] Positive: 20</msg>
+<arg>[${thread_id}] Positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.707069" elapsed="0.000269"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.706857" elapsed="0.000493"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Non-positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.707422" elapsed="0.000009"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.707361" elapsed="0.000078"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.702662" elapsed="0.004784"/>
+</if>
+<var name="${val}">20</var>
+<status status="PASS" start="2026-04-20T10:25:31.702625" elapsed="0.004832"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="${val} &gt; 0">
+<kw name="Log" owner="BuiltIn">
+<arg>[${thread_id}] Positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T10:25:31.707966" elapsed="0.000024"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T10:25:31.707581" elapsed="0.000425"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.708513" level="INFO">[Thread-2] Non-positive: -5</msg>
+<arg>[${thread_id}] Non-positive: ${val}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.708113" elapsed="0.000445"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.708026" elapsed="0.000549"/>
+</branch>
+<status status="PASS" start="2026-04-20T10:25:31.707567" elapsed="0.001022"/>
+</if>
+<var name="${val}">-5</var>
+<status status="PASS" start="2026-04-20T10:25:31.707541" elapsed="0.001068"/>
+</iter>
+<var>${val}</var>
+<value>@{values}</value>
+<status status="PASS" start="2026-04-20T10:25:31.701686" elapsed="0.006939"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.709111" level="INFO">[Thread-2] Nested FOR+IF done</msg>
+<arg>[${thread_id}] Nested FOR+IF done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.708718" elapsed="0.000447"/>
+</kw>
+<arg>Thread-2</arg>
+<arg>10</arg>
+<arg>20</arg>
+<arg>-5</arg>
+<doc>FOR loop containing IF branch – deep nesting in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.701201" elapsed="0.008019"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.695700" elapsed="0.013534"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.695571" elapsed="0.016683"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.712878" level="INFO">Deeply nested FOR+IF structure preserved in thread results</msg>
+<arg>Deeply nested FOR+IF structure preserved in thread results</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.712478" elapsed="0.000697"/>
+</kw>
+<doc>FOR loop containing an IF block – tests multi-level nesting.
+The output.xml must show for &gt; iter &gt; if &gt; branch hierarchy.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.692002" elapsed="0.021351"/>
+</test>
+<test id="s1-t5" name="S3-TC5: Mixed Library And User Keywords In Parallel" line="54">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.714772" level="INFO">@{kw1} = [ Simple Worker Keyword | Thread-1 | 3 ]</msg>
+<var>@{kw1}</var>
+<arg>Simple Worker Keyword</arg>
+<arg>${T1}</arg>
+<arg>3</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.714242" elapsed="0.000572"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.715396" level="INFO">@{kw2} = [ User KW With RF FOR Loop | Thread-2 | x | y | z ]</msg>
+<var>@{kw2}</var>
+<arg>User KW With RF FOR Loop</arg>
+<arg>${T2}</arg>
+<arg>x</arg>
+<arg>y</arg>
+<arg>z</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.714991" elapsed="0.000440"/>
+</kw>
+<kw name="Run Keywords In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] Simple Worker Keyword" owner="ThreadLogger">
+<kw name="Simple Worker Keyword" owner="WorkerLib">
+<msg time="2026-04-20T10:25:31.716598" level="INFO">[Thread-1] Keyword starting, steps=3</msg>
+<msg time="2026-04-20T10:25:31.716625" level="INFO">[Thread-1] Step 1/3</msg>
+<msg time="2026-04-20T10:25:31.716635" level="INFO">[Thread-1] Step 2/3</msg>
+<msg time="2026-04-20T10:25:31.716643" level="INFO">[Thread-1] Step 3/3</msg>
+<msg time="2026-04-20T10:25:31.716649" level="INFO">[Thread-1] Keyword done</msg>
+<arg>Thread-1</arg>
+<arg>3</arg>
+<doc>Log a sequence of steps – plain library keyword.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.716210" elapsed="0.000467"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.715740" elapsed="0.000948"/>
+</kw>
+<kw name="[Thread 2] User KW With RF FOR Loop" owner="ThreadLogger">
+<kw name="User KW With RF FOR Loop" owner="rf_user_keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.718480" level="INFO">[Thread-2] RF FOR loop starting</msg>
+<arg>[${thread_id}] RF FOR loop starting</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.718174" elapsed="0.000345"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.718940" level="INFO">[Thread-2] RF FOR item: x</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.718748" elapsed="0.000216"/>
+</kw>
+<var name="${item}">x</var>
+<status status="PASS" start="2026-04-20T10:25:31.718674" elapsed="0.000299"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.719237" level="INFO">[Thread-2] RF FOR item: y</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.719068" elapsed="0.000192"/>
+</kw>
+<var name="${item}">y</var>
+<status status="PASS" start="2026-04-20T10:25:31.719016" elapsed="0.000253"/>
+</iter>
+<iter>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.719526" level="INFO">[Thread-2] RF FOR item: z</msg>
+<arg>[${thread_id}] RF FOR item: ${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.719365" elapsed="0.000182"/>
+</kw>
+<var name="${item}">z</var>
+<status status="PASS" start="2026-04-20T10:25:31.719312" elapsed="0.000244"/>
+</iter>
+<var>${item}</var>
+<value>@{items}</value>
+<status status="PASS" start="2026-04-20T10:25:31.718562" elapsed="0.001002"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.719746" level="INFO">[Thread-2] RF FOR loop done</msg>
+<arg>[${thread_id}] RF FOR loop done</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.719613" elapsed="0.000152"/>
+</kw>
+<arg>Thread-2</arg>
+<arg>x</arg>
+<arg>y</arg>
+<arg>z</arg>
+<doc>RF FOR loop – produces FOR+ITER nodes in output.xml</doc>
+<status status="PASS" start="2026-04-20T10:25:31.717531" elapsed="0.002262"/>
+</kw>
+<status status="PASS" start="2026-04-20T10:25:31.715747" elapsed="0.004054"/>
+</kw>
+<arg>${kw1}</arg>
+<arg>${kw2}</arg>
+<doc>Run RF keywords in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.715578" elapsed="0.004740"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:25:31.720574" level="INFO">Mixed library and user keyword threads both preserved correctly</msg>
+<arg>Mixed library and user keyword threads both preserved correctly</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.720406" elapsed="0.000200"/>
+</kw>
+<doc>Thread 1 runs a library keyword (Python),
+Thread 2 runs a user keyword with RF FOR loop.
+Both must produce correct result trees.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.713596" elapsed="0.007088"/>
+</test>
+<doc>Scenario 3 – RF-native FOR / IF / TRY-EXCEPT structures inside threads.
+
+Verifies requirement 10: nested RF result nodes (FOR, ITER,
+IF_ELSE_ROOT, BRANCH, TRY_EXCEPT_ROOT) must appear with their
+proper tags and signatures in output.xml when executed inside
+parallel thread wrappers. No flattening or degradation allowed.</doc>
+<status status="PASS" start="2026-04-20T10:25:31.585186" elapsed="0.135819"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Scenario3 Nested" id="s1" pass="5" fail="0" skip="0">Test Scenario3 Nested</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

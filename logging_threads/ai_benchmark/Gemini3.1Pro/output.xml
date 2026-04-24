@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.13.5 on win32)" generated="2026-04-23T18:56:56.419005" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Threads" source="D:\Pobrane\RFnew\FinalneSummary\model_solutions_v2\ge2\test_threads.robot">
+<test id="s1-t1" name="Test Logging Without Interceptor" line="6">
+<kw name="Start Threads" owner="mock_thread_lib">
+<msg time="2026-04-23T18:56:56.497831" level="INFO">Thread T0 starting</msg>
+<msg time="2026-04-23T18:56:56.498942" level="INFO">Thread T1 starting</msg>
+<msg time="2026-04-23T18:56:56.598629" level="INFO">Thread T0 running keyword...</msg>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-23T18:56:56.599171" level="INFO">Message from T0 run_keyword</msg>
+<arg>Message from T0 run_keyword</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-23T18:56:56.598860" elapsed="0.000362"/>
+</kw>
+<msg time="2026-04-23T18:56:56.599283" level="INFO">Thread T0 finishing</msg>
+<msg time="2026-04-23T18:56:56.599604" level="INFO">Thread T1 running keyword...</msg>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-23T18:56:56.599987" level="INFO">Message from T1 run_keyword</msg>
+<arg>Message from T1 run_keyword</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-23T18:56:56.599753" elapsed="0.000284"/>
+</kw>
+<msg time="2026-04-23T18:56:56.600084" level="INFO">Thread T1 finishing</msg>
+<status status="PASS" start="2026-04-23T18:56:56.496878" elapsed="0.103355"/>
+</kw>
+<doc>Threads run but their logs may be mismatched or lost.</doc>
+<status status="PASS" start="2026-04-23T18:56:56.495932" elapsed="0.104549"/>
+</test>
+<test id="s1-t2" name="Test Logging With Interceptor" line="10">
+<kw name="Start Thread Interception" owner="ThreadInterceptorLibrary">
+<status status="PASS" start="2026-04-23T18:56:56.602128" elapsed="0.000659"/>
+</kw>
+<kw name="Start Threads" owner="mock_thread_lib">
+<msg time="2026-04-23T18:56:56.707456" level="INFO">INTERCEPTED log_message IN RobotFrameworkTimeoutThread_0
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_1
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_1
+INTERCEPTED start_library_keyword IN RobotFrameworkTimeoutThread_1
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_1
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_1
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_0
+INTERCEPTED start_library_keyword IN RobotFrameworkTimeoutThread_0
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_0
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_0
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_1
+INTERCEPTED end_library_keyword IN RobotFrameworkTimeoutThread_1
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_1
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_0
+INTERCEPTED end_library_keyword IN RobotFrameworkTimeoutThread_0
+INTERCEPTED log_message IN RobotFrameworkTimeoutThread_0</msg>
+<status status="PASS" start="2026-04-23T18:56:56.603115" elapsed="0.104658"/>
+</kw>
+<kw name="Stop And Replay Thread Logs" owner="ThreadInterceptorLibrary">
+<kw name="Thread: RobotFrameworkTimeoutThread_0">
+<msg time="2026-04-23T18:56:56.603601" level="INFO">Thread T0 starting</msg>
+<msg time="2026-04-23T18:56:56.705598" level="INFO">Thread T0 running keyword...</msg>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-23T18:56:56.706196" level="INFO">Message from T0 run_keyword</msg>
+<msg time="2026-04-23T18:56:56.706238" level="INFO">INTERCEPTED log_message IN RobotFrameworkTimeoutThread_0</msg>
+<arg>Message from T0 run_keyword</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-23T18:56:56.705822" elapsed="0.001403"/>
+</kw>
+<msg time="2026-04-23T18:56:56.707258" level="INFO">Thread T0 finishing</msg>
+<status status="FAIL" elapsed="0.000000"/>
+</kw>
+<kw name="Thread: RobotFrameworkTimeoutThread_1">
+<msg time="2026-04-23T18:56:56.603946" level="INFO">Thread T1 starting</msg>
+<msg time="2026-04-23T18:56:56.704158" level="INFO">Thread T1 running keyword...</msg>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-23T18:56:56.705386" level="INFO">Message from T1 run_keyword</msg>
+<msg time="2026-04-23T18:56:56.705519" level="INFO">INTERCEPTED log_message IN RobotFrameworkTimeoutThread_1</msg>
+<arg>Message from T1 run_keyword</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-23T18:56:56.704402" elapsed="0.002519"/>
+</kw>
+<msg time="2026-04-23T18:56:56.706964" level="INFO">Thread T1 finishing</msg>
+<status status="FAIL" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-04-23T18:56:56.708130" elapsed="0.000465"/>
+</kw>
+<doc>Thread logs are caught and played back nicely.</doc>
+<status status="PASS" start="2026-04-23T18:56:56.601226" elapsed="0.107586"/>
+</test>
+<status status="PASS" start="2026-04-23T18:56:56.421737" elapsed="0.287647"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Threads" id="s1" pass="2" fail="0" skip="0">Test Threads</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

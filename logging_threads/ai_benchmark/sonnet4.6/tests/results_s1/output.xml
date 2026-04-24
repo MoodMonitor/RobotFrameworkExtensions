@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.13.2 on win32)" generated="2026-04-20T10:22:03.315828" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Scenario1" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\test_scenario1.robot">
+<test id="s1-t1" name="S1-TC1: Two Threads Log Simple Messages In Parallel" line="19">
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.430305" level="INFO">${f1} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB406200&gt;</msg>
+<var>${f1}</var>
+<arg>${THREAD1_ID}</arg>
+<arg>3</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.429530" elapsed="0.000845"/>
+</kw>
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.430985" level="INFO">${f2} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB406520&gt;</msg>
+<var>${f2}</var>
+<arg>${THREAD2_ID}</arg>
+<arg>3</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.430626" elapsed="0.000403"/>
+</kw>
+<kw name="Run Functions In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.432644" level="INFO">[Thread-Alpha] Thread started</msg>
+<msg time="2026-04-20T10:22:03.432701" level="INFO">[Thread-Alpha] Message 1 of 3</msg>
+<msg time="2026-04-20T10:22:03.432714" level="INFO">[Thread-Alpha] Message 2 of 3</msg>
+<msg time="2026-04-20T10:22:03.432722" level="INFO">[Thread-Alpha] Message 3 of 3</msg>
+<msg time="2026-04-20T10:22:03.432729" level="INFO">[Thread-Alpha] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.431254" elapsed="0.001482"/>
+</kw>
+<kw name="[Thread 2] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.433034" level="INFO">[Thread-Beta] Thread started</msg>
+<msg time="2026-04-20T10:22:03.433084" level="INFO">[Thread-Beta] Message 1 of 3</msg>
+<msg time="2026-04-20T10:22:03.433099" level="INFO">[Thread-Beta] Message 2 of 3</msg>
+<msg time="2026-04-20T10:22:03.433111" level="INFO">[Thread-Beta] Message 3 of 3</msg>
+<msg time="2026-04-20T10:22:03.433124" level="INFO">[Thread-Beta] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.431261" elapsed="0.001875"/>
+</kw>
+<arg>${f1}</arg>
+<arg>${f2}</arg>
+<doc>Run Python callables in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.431139" elapsed="0.002299"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.433804" level="INFO">Both threads completed successfully</msg>
+<arg>Both threads completed successfully</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.433563" elapsed="0.000278"/>
+</kw>
+<doc>Two threads each log 3 messages via robot.api.logger.
+Expected: two [Thread N] wrapper keywords appear in the
+report, each containing its own messages only.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.427873" elapsed="0.006086"/>
+</test>
+<test id="s1-t2" name="S1-TC2: Three Threads Log Messages Concurrently" line="28">
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.435235" level="INFO">${f1} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB407060&gt;</msg>
+<var>${f1}</var>
+<arg>${THREAD1_ID}</arg>
+<arg>4</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.434867" elapsed="0.000402"/>
+</kw>
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.435594" level="INFO">${f2} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB407380&gt;</msg>
+<var>${f2}</var>
+<arg>${THREAD2_ID}</arg>
+<arg>4</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.435409" elapsed="0.000216"/>
+</kw>
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.435968" level="INFO">${f3} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB4065C0&gt;</msg>
+<var>${f3}</var>
+<arg>${THREAD3_ID}</arg>
+<arg>4</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.435755" elapsed="0.000241"/>
+</kw>
+<kw name="Run Functions In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.436574" level="INFO">[Thread-Alpha] Thread started</msg>
+<msg time="2026-04-20T10:22:03.436616" level="INFO">[Thread-Alpha] Message 1 of 4</msg>
+<msg time="2026-04-20T10:22:03.436626" level="INFO">[Thread-Alpha] Message 2 of 4</msg>
+<msg time="2026-04-20T10:22:03.436637" level="INFO">[Thread-Alpha] Message 3 of 4</msg>
+<msg time="2026-04-20T10:22:03.436646" level="INFO">[Thread-Alpha] Message 4 of 4</msg>
+<msg time="2026-04-20T10:22:03.436653" level="INFO">[Thread-Alpha] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.436182" elapsed="0.000477"/>
+</kw>
+<kw name="[Thread 2] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.436876" level="INFO">[Thread-Beta] Thread started</msg>
+<msg time="2026-04-20T10:22:03.436902" level="INFO">[Thread-Beta] Message 1 of 4</msg>
+<msg time="2026-04-20T10:22:03.436911" level="INFO">[Thread-Beta] Message 2 of 4</msg>
+<msg time="2026-04-20T10:22:03.436917" level="INFO">[Thread-Beta] Message 3 of 4</msg>
+<msg time="2026-04-20T10:22:03.436923" level="INFO">[Thread-Beta] Message 4 of 4</msg>
+<msg time="2026-04-20T10:22:03.436929" level="INFO">[Thread-Beta] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.436187" elapsed="0.000747"/>
+</kw>
+<kw name="[Thread 3] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.437129" level="INFO">[Thread-Gamma] Thread started</msg>
+<msg time="2026-04-20T10:22:03.437155" level="INFO">[Thread-Gamma] Message 1 of 4</msg>
+<msg time="2026-04-20T10:22:03.437165" level="INFO">[Thread-Gamma] Message 2 of 4</msg>
+<msg time="2026-04-20T10:22:03.437171" level="INFO">[Thread-Gamma] Message 3 of 4</msg>
+<msg time="2026-04-20T10:22:03.437180" level="INFO">[Thread-Gamma] Message 4 of 4</msg>
+<msg time="2026-04-20T10:22:03.437186" level="INFO">[Thread-Gamma] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.436191" elapsed="0.001001"/>
+</kw>
+<arg>${f1}</arg>
+<arg>${f2}</arg>
+<arg>${f3}</arg>
+<doc>Run Python callables in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.436077" elapsed="0.001537"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.438123" level="INFO">Three threads completed successfully</msg>
+<arg>Three threads completed successfully</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.437796" elapsed="0.000398"/>
+</kw>
+<doc>Three threads run simultaneously. Verifies that messages
+from different threads never mix into the wrong wrapper.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.434203" elapsed="0.004138"/>
+</test>
+<test id="s1-t3" name="S1-TC3: Thread Logs At Multiple Levels Including WARN" line="37">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.439957" level="INFO">${f1} = &lt;function &lt;lambda&gt; at 0x00000136AB407D80&gt;</msg>
+<var>${f1}</var>
+<arg>lambda: __import__('WorkerLib').log_and_warn_from_thread('${THREAD1_ID}')</arg>
+<arg>modules=WorkerLib</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.439241" elapsed="0.000756"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.440702" level="INFO">${f2} = &lt;function &lt;lambda&gt; at 0x00000136AB4342C0&gt;</msg>
+<var>${f2}</var>
+<arg>lambda: __import__('WorkerLib').log_and_warn_from_thread('${THREAD2_ID}')</arg>
+<arg>modules=WorkerLib</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.440164" elapsed="0.000571"/>
+</kw>
+<kw name="Run Functions In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.441597" level="DEBUG">[Thread-Alpha] DEBUG entry</msg>
+<msg time="2026-04-20T10:22:03.441709" level="INFO">[Thread-Alpha] INFO entry</msg>
+<msg time="2026-04-20T10:22:03.441743" level="WARN">[Thread-Alpha] WARN entry</msg>
+<msg time="2026-04-20T10:22:03.442035" level="INFO">[Thread-Alpha] After warn</msg>
+<status status="PASS" start="2026-04-20T10:22:03.441247" elapsed="0.001017"/>
+</kw>
+<kw name="[Thread 2] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.442371" level="DEBUG">[Thread-Beta] DEBUG entry</msg>
+<msg time="2026-04-20T10:22:03.442406" level="INFO">[Thread-Beta] INFO entry</msg>
+<msg time="2026-04-20T10:22:03.442422" level="WARN">[Thread-Beta] WARN entry</msg>
+<msg time="2026-04-20T10:22:03.442619" level="INFO">[Thread-Beta] After warn</msg>
+<status status="PASS" start="2026-04-20T10:22:03.441254" elapsed="0.001392"/>
+</kw>
+<arg>${f1}</arg>
+<arg>${f2}</arg>
+<doc>Run Python callables in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.441077" elapsed="0.001957"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.443666" level="INFO">Multi-level logging verified</msg>
+<arg>Multi-level logging verified</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.443226" elapsed="0.000531"/>
+</kw>
+<doc>One thread logs DEBUG, INFO and WARN messages.
+All levels must be visible in the thread wrapper.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.438635" elapsed="0.005308"/>
+</test>
+<test id="s1-t4" name="S1-TC4: Main Thread Is Unaffected By Parallel Logging" line="45">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.445556" level="INFO">MAIN: before parallel block</msg>
+<arg>MAIN: before parallel block</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.445177" elapsed="0.000433"/>
+</kw>
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.446129" level="INFO">${f1} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB406E80&gt;</msg>
+<var>${f1}</var>
+<arg>${THREAD1_ID}</arg>
+<arg>2</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.445776" elapsed="0.000401"/>
+</kw>
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.446721" level="INFO">${f2} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB434C20&gt;</msg>
+<var>${f2}</var>
+<arg>${THREAD2_ID}</arg>
+<arg>2</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.446348" elapsed="0.000404"/>
+</kw>
+<kw name="Run Functions In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.447849" level="INFO">[Thread-Alpha] Thread started</msg>
+<msg time="2026-04-20T10:22:03.447892" level="INFO">[Thread-Alpha] Message 1 of 2</msg>
+<msg time="2026-04-20T10:22:03.447906" level="INFO">[Thread-Alpha] Message 2 of 2</msg>
+<msg time="2026-04-20T10:22:03.447915" level="INFO">[Thread-Alpha] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.447378" elapsed="0.000543"/>
+</kw>
+<kw name="[Thread 2] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.448159" level="INFO">[Thread-Beta] Thread started</msg>
+<msg time="2026-04-20T10:22:03.448192" level="INFO">[Thread-Beta] Message 1 of 2</msg>
+<msg time="2026-04-20T10:22:03.448205" level="INFO">[Thread-Beta] Message 2 of 2</msg>
+<msg time="2026-04-20T10:22:03.448216" level="INFO">[Thread-Beta] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.447389" elapsed="0.000837"/>
+</kw>
+<arg>${f1}</arg>
+<arg>${f2}</arg>
+<doc>Run Python callables in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.446860" elapsed="0.001639"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.449080" level="INFO">MAIN: after parallel block – still in main scope</msg>
+<arg>MAIN: after parallel block – still in main scope</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.448708" elapsed="0.000441"/>
+</kw>
+<doc>Log messages on the main thread before, during
+(sequentially) and after parallel calls remain
+in the main execution scope – not in any thread wrapper.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.444316" elapsed="0.004987"/>
+</test>
+<test id="s1-t5" name="S1-TC5: Single Failing Thread Is Clearly Visible As FAIL" line="55">
+<kw name="Get Failing Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.451312" level="INFO">${f_fail} = &lt;function WorkerLib.get_failing_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB3E1120&gt;</msg>
+<var>${f_fail}</var>
+<arg>${THREAD1_ID}</arg>
+<doc>Return a lambda that will fail.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.450543" elapsed="0.000845"/>
+</kw>
+<kw name="Run Keyword And Expect Error" owner="BuiltIn">
+<kw name="Run Functions In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.452603" level="INFO">[Thread-Alpha] About to fail</msg>
+<msg time="2026-04-20T10:22:03.455628" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\ThreadLogger.py", line 396, in run_thread
+    cfg["func"](*cfg["args"])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\WorkerLib.py", line 128, in &lt;lambda&gt;
+    return lambda: failing_thread_function(thread_id)
+                   ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\WorkerLib.py", line 42, in failing_thread_function
+    raise RuntimeError(f"Intentional failure in {thread_id}")
+RuntimeError: Intentional failure in Thread-Alpha
+</msg>
+<status status="FAIL" start="2026-04-20T10:22:03.452273" elapsed="0.003385">Intentional failure in Thread-Alpha</status>
+</kw>
+<arg>${f_fail}</arg>
+<doc>Run Python callables in parallel threads, one thread per argument.</doc>
+<status status="FAIL" start="2026-04-20T10:22:03.452113" elapsed="0.004094">Parallel execution failed in 1 thread(s): Thread 1: Intentional failure in Thread-Alpha</status>
+</kw>
+<arg>*Intentional failure*</arg>
+<arg>Run Functions In Parallel</arg>
+<arg>${f_fail}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.451617" elapsed="0.005069"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.457500" level="INFO">Expected failure was caught correctly</msg>
+<arg>Expected failure was caught correctly</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.456992" elapsed="0.000593"/>
+</kw>
+<doc>One thread raises an exception.  The thread wrapper
+must show FAIL status and the keyword overall must fail.
+The failure message must appear in the report.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.449635" elapsed="0.008125"/>
+</test>
+<test id="s1-t6" name="S1-TC6: One Failing One Passing Thread" line="64">
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.459244" level="INFO">${f_ok} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB407F60&gt;</msg>
+<var>${f_ok}</var>
+<arg>${THREAD2_ID}</arg>
+<arg>2</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.458666" elapsed="0.000620"/>
+</kw>
+<kw name="Get Failing Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.459986" level="INFO">${f_fail} = &lt;function WorkerLib.get_failing_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB3E0F40&gt;</msg>
+<var>${f_fail}</var>
+<arg>${THREAD1_ID}</arg>
+<doc>Return a lambda that will fail.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.459695" elapsed="0.000333"/>
+</kw>
+<kw name="Run Keyword And Expect Error" owner="BuiltIn">
+<kw name="Run Functions In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.464793" level="INFO">[Thread-Alpha] About to fail</msg>
+<msg time="2026-04-20T10:22:03.466445" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\ThreadLogger.py", line 396, in run_thread
+    cfg["func"](*cfg["args"])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\WorkerLib.py", line 128, in &lt;lambda&gt;
+    return lambda: failing_thread_function(thread_id)
+                   ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\siluch\Downloads\robot_test\cursor\v2\Sonnet4.6\tests\WorkerLib.py", line 42, in failing_thread_function
+    raise RuntimeError(f"Intentional failure in {thread_id}")
+RuntimeError: Intentional failure in Thread-Alpha
+</msg>
+<status status="FAIL" start="2026-04-20T10:22:03.461083" elapsed="0.005386">Intentional failure in Thread-Alpha</status>
+</kw>
+<kw name="[Thread 2] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.465425" level="INFO">[Thread-Beta] Thread started</msg>
+<msg time="2026-04-20T10:22:03.465486" level="INFO">[Thread-Beta] Message 1 of 2</msg>
+<msg time="2026-04-20T10:22:03.465553" level="INFO">[Thread-Beta] Message 2 of 2</msg>
+<msg time="2026-04-20T10:22:03.465570" level="INFO">[Thread-Beta] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.461092" elapsed="0.004488"/>
+</kw>
+<arg>${f_fail}</arg>
+<arg>${f_ok}</arg>
+<doc>Run Python callables in parallel threads, one thread per argument.</doc>
+<status status="FAIL" start="2026-04-20T10:22:03.460860" elapsed="0.006110">Parallel execution failed in 1 thread(s): Thread 1: Intentional failure in Thread-Alpha</status>
+</kw>
+<arg>*Intentional failure*</arg>
+<arg>Run Functions In Parallel</arg>
+<arg>${f_fail}</arg>
+<arg>${f_ok}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.460261" elapsed="0.006927"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.467866" level="INFO">Mixed outcome verified</msg>
+<arg>Mixed outcome verified</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.467423" elapsed="0.000532"/>
+</kw>
+<doc>Mixed result: one thread passes, one fails.
+Both thread wrappers must appear in the report.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.458067" elapsed="0.010064"/>
+</test>
+<test id="s1-t7" name="S1-TC7: Timestamps Are Preserved (Sanity Check)" line="73">
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.469625" level="INFO">${f1} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB4079C0&gt;</msg>
+<var>${f1}</var>
+<arg>${THREAD1_ID}</arg>
+<arg>2</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.469220" elapsed="0.000450"/>
+</kw>
+<kw name="Run Functions In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.470426" level="INFO">[Thread-Alpha] Thread started</msg>
+<msg time="2026-04-20T10:22:03.470488" level="INFO">[Thread-Alpha] Message 1 of 2</msg>
+<msg time="2026-04-20T10:22:03.470501" level="INFO">[Thread-Alpha] Message 2 of 2</msg>
+<msg time="2026-04-20T10:22:03.470511" level="INFO">[Thread-Alpha] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.470013" elapsed="0.000506"/>
+</kw>
+<arg>${f1}</arg>
+<doc>Run Python callables in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.469840" elapsed="0.001046"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.471389" level="INFO">Timestamp sanity check passed</msg>
+<arg>Timestamp sanity check passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.471043" elapsed="0.000409"/>
+</kw>
+<doc>Basic sanity: the keyword completes without error and
+the thread wrappers have non-zero elapsed time
+(structural check – timestamp values confirmed in log.html).</doc>
+<status status="PASS" start="2026-04-20T10:22:03.468429" elapsed="0.003160"/>
+</test>
+<test id="s1-t8" name="S1-TC8: Restore After Parallel Execution (Reversibility)" line="81">
+<kw name="Get Log Function" owner="WorkerLib">
+<msg time="2026-04-20T10:22:03.472884" level="INFO">${f1} = &lt;function WorkerLib.get_log_function.&lt;locals&gt;.&lt;lambda&gt; at 0x00000136AB404040&gt;</msg>
+<var>${f1}</var>
+<arg>${THREAD1_ID}</arg>
+<arg>1</arg>
+<doc>Return a lambda suitable for Run Functions In Parallel.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.472564" elapsed="0.000362"/>
+</kw>
+<kw name="Run Functions In Parallel" owner="ThreadLogger">
+<kw name="[Thread 1] &lt;lambda&gt;" owner="ThreadLogger">
+<msg time="2026-04-20T10:22:03.473729" level="INFO">[Thread-Alpha] Thread started</msg>
+<msg time="2026-04-20T10:22:03.473783" level="INFO">[Thread-Alpha] Message 1 of 1</msg>
+<msg time="2026-04-20T10:22:03.473797" level="INFO">[Thread-Alpha] Thread finished</msg>
+<status status="PASS" start="2026-04-20T10:22:03.473292" elapsed="0.000515"/>
+</kw>
+<arg>${f1}</arg>
+<doc>Run Python callables in parallel threads, one thread per argument.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.473090" elapsed="0.001650"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.475700" level="INFO">POST-PARALLEL: main thread log 1</msg>
+<arg>POST-PARALLEL: main thread log 1</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.474997" elapsed="0.000834"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.476871" level="INFO">POST-PARALLEL: main thread log 2</msg>
+<arg>POST-PARALLEL: main thread log 2</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.476085" elapsed="0.001082"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.478258" level="INFO">${bi_msg} = POST-PARALLEL via BuiltIn</msg>
+<var>${bi_msg}</var>
+<arg>POST-PARALLEL via BuiltIn</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.477633" elapsed="0.000685"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T10:22:03.478947" level="INFO">POST-PARALLEL via BuiltIn</msg>
+<arg>${bi_msg}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.478533" elapsed="0.000488"/>
+</kw>
+<doc>After Run Functions In Parallel completes, logging on
+the main thread must work exactly as before – no leaked
+state from thread proxies.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.471860" elapsed="0.007318"/>
+</test>
+<doc>Scenario 1 – Simple logging from threads.
+
+Verifies that messages produced by robot.api.logger inside
+background threads are captured per-thread and appear in
+output.xml / log.html grouped under individual thread wrapper
+keywords, with original timestamps preserved.</doc>
+<status status="PASS" start="2026-04-20T10:22:03.318896" elapsed="0.160882"/>
+</suite>
+<statistics>
+<total>
+<stat pass="8" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Scenario1" id="s1" pass="8" fail="0" skip="0">Test Scenario1</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

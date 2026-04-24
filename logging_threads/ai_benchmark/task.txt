@@ -1,0 +1,70 @@
+Problem context:
+The Python library uses threading.Thread. Logs generated inside these threads are not correctly written to Robot Framework artifacts. The issue affects both regular log messages and full keyword calls executed in threads. As a result, some entries disappear or end up in the wrong place in the result structure, making output.xml and log.html inconsistent and difficult to analyze.
+
+Problem scope:
+1. Simple logging from threads:
+   a thread logs through the Robot Framework API, but messages are not correctly written to the report.
+2. Running keywords in threads:
+   a thread executes Robot Framework keywords, but their logs and execution events are not correctly represented in the result structure.
+
+Functional requirements:
+1. Logs from each thread must be grouped per thread.
+2. Logs from different threads must not interleave or mix with MainThread logs.
+3. Original message timestamps (generation time) must be preserved.
+4. The solution must be thread-safe and work with many parallel threads.
+5. The solution must support both logging scenarios: regular messages and full keyword execution in threads.
+6. If a thread ends with an error, it must be clearly visible.
+7. The solution must use only Robot Framework API and internal mechanisms. No external pip packages.
+8. Zero-Interference (API Transparency): The solution MUST NOT force the user to modify existing code executed inside a thread.
+9. Reversibility (Reversibility and API Cleanliness): Any interference and behavior modifications may operate only for the lifetime of parallel test threads. After they finish, Robot Framework core and registries must be fully cleaned and restored to the original safe state.
+10. While generating thread results into output.xml, the solution must not flatten or degrade events. If nested FOR loops, IF blocks, or TRY-EXCEPT structures are used inside a thread, they must keep their original tagging and signatures in the report.
+11. You cannot edit Robot Framework source files.
+
+Execution requirements:
+1. First, analyze the problem.
+2. Then prepare the solution.
+3. Create minimal test files that show the problem and confirm solution correctness.
+4. Run tests.
+5. If the solution does not work correctly, improve it until it works.
+6. Finally, evaluate the quality of output.xml and log.html:
+   - whether the structure is correct,
+   - whether logs are readable,
+   - whether per-thread grouping is meaningful,
+   - whether the result is suitable for practical analysis.
+
+Solution comparability requirements:
+In addition to code and tests, prepare a technical report in a separate Markdown file, for example AI_REPORT.md.
+
+The report must include:
+1. Problem diagnosis.
+   Briefly describe what was incorrect and in which scenarios.
+2. Assumptions and limitations.
+   List assumptions you made and solution limitations.
+3. Design rationale.
+   Explain why you chose this approach and what trade-offs you accepted.
+4. Verification process.
+   Describe which tests you ran and what results you obtained.
+5. Iterations and fixes list.
+   If the first version did not work correctly, briefly state what was wrong and what you fixed.
+6. Final result evaluation.
+   Evaluate the quality of output.xml and log.html.
+7. Known risks or gaps.
+   List edge scenarios that may not be fully covered.
+
+Additional report requirements:
+1. Do not describe full internal chain-of-thought step by step.
+2. Instead, provide final decisions, rationale, and verification results.
+3. At the end, add a short self-assessment on a 0-2 scale for each item:
+   - technical correctness,
+   - requirements compliance,
+   - thread safety,
+   - log structure quality,
+   - solution readability,
+   - maintainability.
+
+Expected output format:
+1. Working solution code.
+2. Test files.
+3. Run results or their summary.
+4. AI_REPORT.md report.
+5. Short final note on what works, what was fixed, and remaining risks.

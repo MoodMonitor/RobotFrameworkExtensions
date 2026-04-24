@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.13.2 on win32)" generated="2026-04-20T14:07:11.440701" rpa="false" schemaversion="5">
+<suite id="s1" name="Fixed" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\GTP5.4\Opus4.6\tests\robot\fixed.robot">
+<test id="s1-t1" name="Thread Logs Are Grouped Per Thread" line="7">
+<kw name="Enable Thread Logging Capture" owner="robot_thread_capture" type="SETUP">
+<status status="PASS" start="2026-04-20T14:07:11.489699" elapsed="0.000158"/>
+</kw>
+<kw name="Log From Two Threads" owner="threaded_demo_library">
+<msg time="2026-04-20T14:07:11.490068" level="INFO">main-before-threads</msg>
+<msg time="2026-04-20T14:07:11.512204" level="INFO">main-after-release</msg>
+<group name="Thread worker-1">
+<msg time="2026-04-20T14:07:11.491158" level="INFO">worker-1-info-1</msg>
+<msg time="2026-04-20T14:07:11.512331" level="INFO">worker-1-info-2</msg>
+<status status="PASS" start="2026-04-20T14:07:11.491138" elapsed="0.021207"/>
+</group>
+<group name="Thread worker-2">
+<msg time="2026-04-20T14:07:11.491396" level="INFO">worker-2-info-1</msg>
+<msg time="2026-04-20T14:07:11.512046" level="INFO">worker-2-info-2</msg>
+<status status="PASS" start="2026-04-20T14:07:11.491388" elapsed="0.020693"/>
+</group>
+<msg time="2026-04-20T14:07:11.512582" level="INFO">main-after-join</msg>
+<status status="PASS" start="2026-04-20T14:07:11.489973" elapsed="0.022685"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.489131" elapsed="0.023677"/>
+</test>
+<test id="s1-t2" name="Threaded Keyword Structure Is Preserved" line="10">
+<kw name="Enable Thread Logging Capture" owner="robot_thread_capture" type="SETUP">
+<status status="PASS" start="2026-04-20T14:07:11.513412" elapsed="0.000133"/>
+</kw>
+<kw name="Run Composite Keywords In Threads" owner="threaded_demo_library">
+<group name="Thread kw-thread-1">
+<kw name="Worker Composite Keyword">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.516373" level="INFO">worker 1 start</msg>
+<arg>worker ${index} start</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.515171" elapsed="0.001684"/>
+</kw>
+<for flavor="IN">
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'boom'">
+<try>
+<branch type="TRY">
+<kw name="Log" owner="BuiltIn">
+<arg>try-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.518671" elapsed="0.000019"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.518459" elapsed="0.000250"/>
+</branch>
+<branch type="EXCEPT">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>except-${index}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.518913" elapsed="0.000014"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.518767" elapsed="0.000171"/>
+</branch>
+<status status="NOT RUN" start="2026-04-20T14:07:11.518387" elapsed="0.000589"/>
+</try>
+<status status="NOT RUN" start="2026-04-20T14:07:11.517968" elapsed="0.001023"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.519871" level="INFO">item-1-alpha</msg>
+<arg>item-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.519176" elapsed="0.000750"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.519011" elapsed="0.000930"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:07:11.517932" elapsed="0.002025"/>
+</if>
+<var name="${item}">alpha</var>
+<status status="PASS" start="2026-04-20T14:07:11.517842" elapsed="0.002140"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'boom'">
+<try>
+<branch type="TRY">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.521392" level="INFO">try-1-boom</msg>
+<arg>try-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.520839" elapsed="0.000605"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.520688" elapsed="0.000770"/>
+</branch>
+<branch type="EXCEPT">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>except-${index}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.521647" elapsed="0.000012"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.521506" elapsed="0.000164"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:07:11.520644" elapsed="0.001054"/>
+</try>
+<status status="PASS" start="2026-04-20T14:07:11.520410" elapsed="0.001302"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>item-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.521870" elapsed="0.000011"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.521727" elapsed="0.000164"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:07:11.520391" elapsed="0.001510"/>
+</if>
+<var name="${item}">boom</var>
+<status status="PASS" start="2026-04-20T14:07:11.520332" elapsed="0.001588"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'boom'">
+<try>
+<branch type="TRY">
+<kw name="Log" owner="BuiltIn">
+<arg>try-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.522687" elapsed="0.000013"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.522554" elapsed="0.000157"/>
+</branch>
+<branch type="EXCEPT">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>except-${index}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.522875" elapsed="0.000011"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.522747" elapsed="0.000149"/>
+</branch>
+<status status="NOT RUN" start="2026-04-20T14:07:11.522519" elapsed="0.000401"/>
+</try>
+<status status="NOT RUN" start="2026-04-20T14:07:11.522300" elapsed="0.000635"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.523650" level="INFO">item-1-omega</msg>
+<arg>item-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.523087" elapsed="0.000612"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.522949" elapsed="0.000763"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:07:11.522279" elapsed="0.001447"/>
+</if>
+<var name="${item}">omega</var>
+<status status="PASS" start="2026-04-20T14:07:11.522231" elapsed="0.001517"/>
+</iter>
+<var>${item}</var>
+<value>alpha</value>
+<value>boom</value>
+<value>omega</value>
+<status status="PASS" start="2026-04-20T14:07:11.517061" elapsed="0.006701"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.524357" level="INFO">worker 1 end</msg>
+<arg>worker ${index} end</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.523913" elapsed="0.000494"/>
+</kw>
+<arg>1</arg>
+<status status="PASS" start="2026-04-20T14:07:11.514618" elapsed="0.009867"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.514097" elapsed="0.010414"/>
+</group>
+<group name="Thread kw-thread-2">
+<kw name="Worker Composite Keyword">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.526453" level="INFO">worker 2 start</msg>
+<arg>worker ${index} start</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.526164" elapsed="0.000319"/>
+</kw>
+<for flavor="IN">
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'boom'">
+<try>
+<branch type="TRY">
+<kw name="Log" owner="BuiltIn">
+<arg>try-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.527040" elapsed="0.000008"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.526929" elapsed="0.000128"/>
+</branch>
+<branch type="EXCEPT">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>except-${index}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.527156" elapsed="0.000006"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.527081" elapsed="0.000087"/>
+</branch>
+<status status="NOT RUN" start="2026-04-20T14:07:11.526906" elapsed="0.000276"/>
+</try>
+<status status="NOT RUN" start="2026-04-20T14:07:11.526775" elapsed="0.000415"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.527570" level="INFO">item-2-alpha</msg>
+<arg>item-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.527274" elapsed="0.000324"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.527198" elapsed="0.000408"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:07:11.526764" elapsed="0.000849"/>
+</if>
+<var name="${item}">alpha</var>
+<status status="PASS" start="2026-04-20T14:07:11.526736" elapsed="0.000889"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'boom'">
+<try>
+<branch type="TRY">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.528313" level="INFO">try-2-boom</msg>
+<arg>try-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.528039" elapsed="0.000303"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.527961" elapsed="0.000388"/>
+</branch>
+<branch type="EXCEPT">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>except-${index}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.528455" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.528374" elapsed="0.000097"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:07:11.527941" elapsed="0.000544"/>
+</try>
+<status status="PASS" start="2026-04-20T14:07:11.527825" elapsed="0.000670"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>item-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.528578" elapsed="0.000006"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.528503" elapsed="0.000086"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:07:11.527814" elapsed="0.000781"/>
+</if>
+<var name="${item}">boom</var>
+<status status="PASS" start="2026-04-20T14:07:11.527789" elapsed="0.000817"/>
+</iter>
+<iter>
+<if>
+<branch type="IF" condition="'${item}' == 'boom'">
+<try>
+<branch type="TRY">
+<kw name="Log" owner="BuiltIn">
+<arg>try-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.529041" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.528955" elapsed="0.000100"/>
+</branch>
+<branch type="EXCEPT">
+<pattern>*</pattern>
+<kw name="Log" owner="BuiltIn">
+<arg>except-${index}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-04-20T14:07:11.529144" elapsed="0.000007"/>
+</kw>
+<status status="NOT RUN" start="2026-04-20T14:07:11.529078" elapsed="0.000078"/>
+</branch>
+<status status="NOT RUN" start="2026-04-20T14:07:11.528936" elapsed="0.000233"/>
+</try>
+<status status="NOT RUN" start="2026-04-20T14:07:11.528818" elapsed="0.000359"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.529562" level="INFO">item-2-omega</msg>
+<arg>item-${index}-${item}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.529256" elapsed="0.000333"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.529185" elapsed="0.000411"/>
+</branch>
+<status status="PASS" start="2026-04-20T14:07:11.528809" elapsed="0.000794"/>
+</if>
+<var name="${item}">omega</var>
+<status status="PASS" start="2026-04-20T14:07:11.528782" elapsed="0.000831"/>
+</iter>
+<var>${item}</var>
+<value>alpha</value>
+<value>boom</value>
+<value>omega</value>
+<status status="PASS" start="2026-04-20T14:07:11.526518" elapsed="0.003104"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-04-20T14:07:11.529930" level="INFO">worker 2 end</msg>
+<arg>worker ${index} end</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-04-20T14:07:11.529694" elapsed="0.000259"/>
+</kw>
+<arg>2</arg>
+<status status="PASS" start="2026-04-20T14:07:11.525821" elapsed="0.004170"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.525383" elapsed="0.004619"/>
+</group>
+<status status="PASS" start="2026-04-20T14:07:11.513640" elapsed="0.019965"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.513082" elapsed="0.020790"/>
+</test>
+<test id="s1-t3" name="Thread Failure Is Visible" line="13">
+<kw name="Enable Thread Logging Capture" owner="robot_thread_capture" type="SETUP">
+<status status="PASS" start="2026-04-20T14:07:11.534893" elapsed="0.000253"/>
+</kw>
+<kw name="Run Failing Thread" owner="threaded_demo_library">
+<group name="Thread crash-thread">
+<msg time="2026-04-20T14:07:11.536007" level="ERROR">Unhandled exception in thread 'crash-thread': boom-from-thread</msg>
+<status status="FAIL" start="2026-04-20T14:07:11.535977" elapsed="0.002714">boom-from-thread</status>
+</group>
+<status status="PASS" start="2026-04-20T14:07:11.535363" elapsed="0.003643"/>
+</kw>
+<status status="PASS" start="2026-04-20T14:07:11.534353" elapsed="0.004775"/>
+</test>
+<status status="PASS" start="2026-04-20T14:07:11.441912" elapsed="0.097575"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Fixed" id="s1" pass="3" fail="0" skip="0">Fixed</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-04-20T14:07:11.536007" level="ERROR">Unhandled exception in thread 'crash-thread': boom-from-thread</msg>
+</errors>
+</robot>

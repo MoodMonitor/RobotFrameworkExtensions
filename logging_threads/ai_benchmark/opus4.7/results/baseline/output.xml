@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.13.2 on win32)" generated="2026-04-20T14:44:52.418054" rpa="false" schemaversion="5">
+<suite id="s1" name="01 Baseline Problem" source="C:\Users\siluch\Downloads\robot_test\cursor\v2\Opus4.7\Opus4.6\tests\01_baseline_problem.robot">
+<test id="s1-t1" name="Baseline Thread Logging Is Broken" line="8">
+<kw name="Run Worker Baseline" owner="demo_library.DemoLibrary">
+<msg time="2026-04-20T14:44:52.480459" level="INFO">MainThread: starting 3 baseline workers</msg>
+<msg time="2026-04-20T14:44:52.513078" level="INFO">MainThread: baseline workers finished</msg>
+<arg>3</arg>
+<doc>Spawn ``count`` worker threads using the plain Python threading
+API.  Each worker logs using Robot Framework's public logger.</doc>
+<status status="PASS" start="2026-04-20T14:44:52.479830" elapsed="0.033392"/>
+</kw>
+<doc>Three worker threads try to log 3 messages each.
+The log should only show the MainThread messages.</doc>
+<status status="PASS" start="2026-04-20T14:44:52.479110" elapsed="0.034345"/>
+</test>
+<doc>Reproduces the out-of-the-box thread-logging problem.
+Messages logged from threading.Thread workers are dropped
+by robot.output.librarylogger.write.</doc>
+<status status="PASS" start="2026-04-20T14:44:52.420789" elapsed="0.093236"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="01 Baseline Problem" id="s1" pass="1" fail="0" skip="0">01 Baseline Problem</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
